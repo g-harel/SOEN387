@@ -9,12 +9,13 @@ public class Database {
 	private static String username = Config.read("DB_USERNAME");
 	private static String password = Config.read("DB_PASSWORD");
 	private static String host = Config.read("DB_HOST");
-	
+	private static String port = Config.read("DB_PORT");
+
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
 
         return DriverManager.getConnection(
-    		"jdbc:mysql://" + Database.host + "/" + Database.username
+    		"jdbc:mysql://" + Database.host + ":" + Database.port + "/" + Database.username
         		+ "?user=" + Database.username
 				+ "&password=" + Database.password
         		+ "&characterEncoding=UTF-8"
