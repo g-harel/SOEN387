@@ -10,28 +10,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Register")
-public class Register extends HttpServlet {       
-	public static Map<String, String>registeredMap = new HashMap<String, String>();
+import org.pokeapp.gateways.PlayerRDG;
+import org.pokeapp.util.View;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String user = request.getParameter("user");
-		String pass = request.getParameter("pass");
+@WebServlet("/Register")
+public class Register extends HttpServlet {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String user = req.getParameter("user");
+		String pass = req.getParameter("pass");
 
 		if(user == null || user.isEmpty() || pass == null || pass.isEmpty() ) {
-			request.setAttribute("message", "Please enter both a username and a password.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
-		} else if(registeredMap.containsKey(user)) {
-			request.setAttribute("message", "That user has already registered.");
-			request.getRequestDispatcher("WEB-INF/jsp/fail.jsp").forward(request, response);
-		} else {
-			registeredMap.put(user, pass);
-			request.setAttribute("message", "That user has been successfully registered.");
-			request.getRequestDispatcher("WEB-INF/jsp/success.jsp").forward(request, response);
+			new View(req, res).fail("Please enter both a username and a password.");
+			return;
 		}
+
+		PlayerRDG existingPlayer = PlayerRDG.find(user);
+		if (existingPlayer != null) {
+			new View(req, res).fail("That user has already registered.");
+			return;
+		}
+
+		PlayerRDG newPlayer = PlayerRDG.insert(user, pass);
+		if (newPlayer == null) {
+			new View(req, res).fail("User' " + user + "' could not be registered.");
+			return;
+		}
+
+		req.getSession(true).setAttribute("id", newPlayer.getID());
+		new View(req, res).success("User' " + user + "' was successfully registered.");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doGet(req, res);
 	}
 }
