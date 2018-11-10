@@ -19,7 +19,7 @@ public class Register extends HttpServlet {
 		String user = req.getParameter("user");
 		String pass = req.getParameter("pass");
 
-		if(user == null || user.isEmpty() || pass == null || pass.isEmpty() ) {
+		if (user == null || user.isEmpty() || pass == null || pass.isEmpty()) {
 			new View(req, res).fail("Please enter both a username and a password.");
 			return;
 		}
@@ -32,12 +32,12 @@ public class Register extends HttpServlet {
 
 		PlayerRDG newPlayer = PlayerRDG.insert(user, pass);
 		if (newPlayer == null) {
-			new View(req, res).fail("User '" + user + "' could not be registered.");
+			new View(req, res).fail("User could not be registered.");
 			return;
 		}
 
 		req.getSession(true).setAttribute("id", newPlayer.getId());
-		new View(req, res).success("User '" + user + "' was successfully registered.");
+		new View(req, res).success("User was successfully registered.");
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

@@ -1,7 +1,6 @@
 package org.pokeapp.controllers;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pokeapp.util.View;
 
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/ViewHand")
+public class ViewHand extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.getSession(true).invalidate();
-		new View(req, res).success("User has been successfully logged out.");
+		String game = req.getParameter("game");
+
+		new View(req, res).success("success");
 	}
-	
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		this.doGet(req, res);	
+		this.doGet(req, res);
 	}
 }

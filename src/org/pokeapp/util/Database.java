@@ -12,29 +12,29 @@ public class Database {
 	private static String port = Config.read("DB_PORT");
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver");
 
-        return DriverManager.getConnection(
-    		"jdbc:mysql://" + Database.host + ":" + Database.port + "/" + Database.username
-        		+ "?user=" + Database.username
+		return DriverManager.getConnection(
+			"jdbc:mysql://" + Database.host + ":" + Database.port + "/" + Database.username
+				+ "?user=" + Database.username
 				+ "&password=" + Database.password
-        		+ "&characterEncoding=UTF-8"
+				+ "&characterEncoding=UTF-8"
 				+ "&useUnicode=true"
-        		+ "&useJDBCCompliantTimezoneShift=true"
+				+ "&useJDBCCompliantTimezoneShift=true"
 				+ "&useLegacyDatetimeCode=false"
-        		+ "&serverTimezone=UTC"
+				+ "&serverTimezone=UTC"
 				+ "&autoReconnect=true"
 		);
 	}
-	
+
 	public static void closeConnection(Connection conn) {
 		if (conn == null) {
 			return;
 		}
-		
+
 		try {
 			conn.close();
-		} catch (SQLException e) { 
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

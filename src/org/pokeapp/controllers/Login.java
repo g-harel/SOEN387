@@ -16,7 +16,7 @@ public class Login extends HttpServlet {
 		String user = req.getParameter("user");
 		String pass = req.getParameter("pass");
 
-		if(user == null || user.isEmpty() || pass == null || pass.isEmpty() ) {
+		if (user == null || user.isEmpty() || pass == null || pass.isEmpty()) {
 			new View(req, res).fail("Please enter both a username and password.");
 			return;
 		}
@@ -27,8 +27,8 @@ public class Login extends HttpServlet {
 			return;
 		}
 		
-		req.getSession(true).setAttribute("login", user);
-		new View(req, res).success("User '" + existingPlayer.getUser() + "' has been successfully logged in.");
+		req.getSession(true).setAttribute("userid", existingPlayer.getId());
+		new View(req, res).success("User has been successfully logged in.");
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

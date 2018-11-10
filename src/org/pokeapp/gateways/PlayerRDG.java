@@ -3,7 +3,6 @@ package org.pokeapp.gateways;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ import org.pokeapp.util.Database;
 public class PlayerRDG {
 	public static PlayerRDG insert(String user, String pass) {
 		PlayerRDG p = null;
-		Connection conn;
+		Connection conn = null;
 
 		try {
 			conn = Database.getConnection();
@@ -77,7 +76,7 @@ public class PlayerRDG {
 			conn = Database.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(
-				"SELECT id, user, pass FROM players WHERE user=?;"
+				"SELECT * FROM players WHERE user=?;"
 			);
 			statement.setString(1, user);
 
