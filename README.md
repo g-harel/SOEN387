@@ -2,5 +2,5 @@
 
 ## Setup
 
-- Copy `sample.config` to `.config` and add missing data.
-- Run `./connect` to open the ssh tunnel and create the tables.
+- Copy `sample.config` to `.config` and add required data
+- Run `./connect` to create ssh tunnel and run database teardown/setup

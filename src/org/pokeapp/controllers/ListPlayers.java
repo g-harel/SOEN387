@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.pokeapp.gateways.PlayerRDG;
 import org.pokeapp.util.View;
 
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/ListPlayers")
+public class ListPlayers extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String user = (String)req.getSession(true).getAttribute("login");
-
-		new View(req, res).success("User '" + user + "' has been successfully logged out.");
+		new View(req, res).players(PlayerRDG.find());
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

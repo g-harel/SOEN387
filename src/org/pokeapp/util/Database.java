@@ -26,4 +26,16 @@ public class Database {
 				+ "&autoReconnect=true"
 		);
 	}
+	
+	public static void closeConnection(Connection conn) {
+		if (conn == null) {
+			return;
+		}
+		
+		try {
+			conn.close();
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		}
+	}
 }

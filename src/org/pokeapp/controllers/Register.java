@@ -32,15 +32,15 @@ public class Register extends HttpServlet {
 
 		PlayerRDG newPlayer = PlayerRDG.insert(user, pass);
 		if (newPlayer == null) {
-			new View(req, res).fail("User' " + user + "' could not be registered.");
+			new View(req, res).fail("User '" + user + "' could not be registered.");
 			return;
 		}
 
-		req.getSession(true).setAttribute("id", newPlayer.getID());
-		new View(req, res).success("User' " + user + "' was successfully registered.");
+		req.getSession(true).setAttribute("id", newPlayer.getId());
+		new View(req, res).success("User '" + user + "' was successfully registered.");
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);
+		this.doGet(req, res);
 	}
 }

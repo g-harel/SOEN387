@@ -1,9 +1,12 @@
 package org.pokeapp.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.pokeapp.gateways.PlayerRDG;
 
 public class View {
 	private static void forward(String path, HttpServletRequest req, HttpServletResponse res) {
@@ -35,5 +38,10 @@ public class View {
 	public void success(String message) {
 		this.req.setAttribute("message", message);
 		View.forward("WEB-INF/jsp/success.jsp", this.req, this.res);
+	}
+	
+	public void players(ArrayList<PlayerRDG> players) {
+		this.req.setAttribute("players", players);
+		View.forward("WEB-INF/jsp/players.jsp", this.req, this.res);
 	}
 }

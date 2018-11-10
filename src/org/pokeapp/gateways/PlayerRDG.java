@@ -3,16 +3,19 @@ package org.pokeapp.gateways;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.pokeapp.util.Database;
 
 public class PlayerRDG {
 	public static PlayerRDG insert(String user, String pass) {
 		PlayerRDG p = null;
+		Connection conn;
 
 		try {
-			Connection conn = Database.getConnection();
+			conn = Database.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(
 				"INSERT INTO players (user, pass) VALUES (?, ?)",
@@ -29,20 +32,49 @@ public class PlayerRDG {
 					p = new PlayerRDG(id, user, pass);
 				}
 			}
-
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
 		}
 
 		return p;
 	}
 
-	public static PlayerRDG find(String user) {
-		PlayerRDG p = null;
+	public static ArrayList<PlayerRDG> find() {
+		ArrayList<PlayerRDG> players = new ArrayList<PlayerRDG>();
+		Connection conn = null;
 
 		try {
-			Connection conn = Database.getConnection();
+			conn = Database.getConnection();
+
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+				"SELECT * from players;"
+			);
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String user = resultSet.getString("user");
+				String pass = resultSet.getString("pass");
+				PlayerRDG p = new PlayerRDG(id, user, pass);
+				players.add(p);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
+		}
+
+		return players;
+	}
+
+	public static PlayerRDG find(String user) {
+		PlayerRDG p = null;
+		Connection conn = null;
+
+		try {
+			conn = Database.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(
 				"SELECT id, user, pass FROM players WHERE user=?;"
@@ -55,10 +87,10 @@ public class PlayerRDG {
 				String pass = resultSet.getString("pass");
 				p = new PlayerRDG(id, user, pass);
 			}
-
-			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
 		}
 
 		return p;
@@ -87,7 +119,7 @@ public class PlayerRDG {
 		this.pass = pass;
 	}
 
-	public int getID() {
+	public int getId() {
 		return this.id;
 	}
 

@@ -32,6 +32,6 @@ public class Login extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);	
+		this.doGet(req, res);	
 	}
 }
