@@ -6,9 +6,9 @@
 		<c:forEach items="${challenges}" var="challenge" varStatus="stat">
 			{
 				"id": <c:out value="${challenge.id}"/>,
-				"challenger": "<c:out value="${player.challenger}"/>",
-				"challengee": "<c:out value="${player.challengee}"/>",
-				"status": "<c:out value="${player.status}"/>"
+				"challenger": <c:out value="${challenge.challenger}"/>,
+				"challengee": <c:out value="${challenge.challengee}"/>,
+				"status": <c:out value="${challenge.status}"/>
 			}
 			<c:if test="${!stat.last}">,</c:if>
 		</c:forEach>

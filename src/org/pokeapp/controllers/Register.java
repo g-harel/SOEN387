@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
 			return;
 		}
 
-		req.getSession(true).setAttribute("id", newPlayer.getId());
+		req.getSession(true).setAttribute("userid", newPlayer.getId());
 		new View(req, res).success("User was successfully registered.");
 	}
 

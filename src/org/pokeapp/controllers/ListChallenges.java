@@ -13,6 +13,11 @@ import org.pokeapp.util.View;
 @WebServlet("/ListChallenges")
 public class ListChallenges extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		if (req.getSession(true).getAttribute("userid") == null) {
+			new View(req, res).fail("User is not logged in.");
+			return;
+		}
+
 		new View(req, res).challenges(ChallengeRDG.find());
 	}
 

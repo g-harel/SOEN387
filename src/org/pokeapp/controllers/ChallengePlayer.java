@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pokeapp.gateways.ChallengeRDG;
+import org.pokeapp.gateways.DeckRDG;
 import org.pokeapp.util.View;
 
 @WebServlet("/ChallengePlayer")
@@ -20,8 +21,25 @@ public class ChallengePlayer extends HttpServlet {
 			return;
 		}
 
+		Object challengerId = req.getSession(true).getAttribute("userid");
+		if (challengerId == null) {
+			new View(req, res).fail("User is not logged in.");
+			return;
+		}
+		
 		int challenger = (int)req.getSession(true).getAttribute("userid");
 		int challengee = Integer.parseInt(player);
+		
+		if (challenger == challengee) {
+			new View(req, res).fail("Cannot challenge self.");
+			return;
+		}
+		
+		DeckRDG challengerDeck = DeckRDG.findByPlayer(challenger);
+		if (challengerDeck == null) {
+			new View(req, res).fail("User does not have a deck.");
+			return;
+		}
 		
 		ChallengeRDG newChallenge = ChallengeRDG.insert(challenger, challengee);
 		if (newChallenge == null) {

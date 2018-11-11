@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import org.pokeapp.util.Database;
 
 public class ChallengeRDG {
+	public static final int STATUS_OPEN = 0;
+	public static final int STATUS_REFUSED = 1;
+	public static final int STATUS_WITHDRAWN = 2;
+	public static final int STATUS_ACCEPTED = 3;
+
 	public static ChallengeRDG insert(int challenger, int challengee) {
 		ChallengeRDG c = null;
 		Connection conn = null;
@@ -28,7 +33,7 @@ public class ChallengeRDG {
 				ResultSet resultSet = statement.getGeneratedKeys();
 				if (resultSet.next()) {
 					int id = resultSet.getInt(1);
-					c = new ChallengeRDG(id, challenger, challengee, 0);
+					c = new ChallengeRDG(id, challenger, challengee, ChallengeRDG.STATUS_OPEN);
 				}
 			}
 		} catch (Exception e) {
