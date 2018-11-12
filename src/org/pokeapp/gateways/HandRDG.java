@@ -13,6 +13,7 @@ import org.pokeapp.util.Database;
 
 public class HandRDG {
 	public static final String STATUS_PLAYING = "playing";
+	public static final String STATUS_RETIRED = "retired";
 
 	protected static HandRDG readResultSet(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id");
@@ -96,6 +97,81 @@ public class HandRDG {
 		}
 
 		return hands;
+	}
+
+	public static HandRDG draw(int gameId, int playerId) {
+		HandRDG h = null;
+		Connection conn = null;
+
+		try {
+			conn = Database.getConnection();
+
+			PreparedStatement udpateStatement = conn.prepareStatement(
+				"UPDATE hands SET hand_size=hand_size+1, deck_size=deck_size-1 WHERE game_id=? AND player_id=?;"
+			);
+			udpateStatement.setInt(1, gameId);
+			udpateStatement.setInt(2, playerId);
+
+			int touched = udpateStatement.executeUpdate();
+			if (touched == 0) {
+				return null;
+			}
+
+			PreparedStatement statement = conn.prepareStatement(
+				"SELECT * from hands WHERE game_id=? AND player_id=?;"
+			);
+			statement.setInt(1, gameId);
+			statement.setInt(2, playerId);
+
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				h = HandRDG.readResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
+		}
+
+		return h;
+	}
+
+	public static HandRDG retire(int gameId, int playerId) {
+		HandRDG h = null;
+		Connection conn = null;
+
+		try {
+			conn = Database.getConnection();
+
+			PreparedStatement updateStatement = conn.prepareStatement(
+				"UPDATE hands SET hand_status=? WHERE game_id=? AND player_id=?;"
+			);
+			updateStatement.setString(1, HandRDG.STATUS_RETIRED);
+			updateStatement.setInt(2, gameId);
+			updateStatement.setInt(3, playerId);
+
+			int touched = updateStatement.executeUpdate();
+			if (touched == 0) {
+				return null;
+			}
+
+			PreparedStatement statement = conn.prepareStatement(
+				"SELECT * from hands WHERE game_id=? AND player_id=?;"
+			);
+			statement.setInt(1, gameId);
+			statement.setInt(2, playerId);
+
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				h = HandRDG.readResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
+		}
+
+		return h;
 	}
 
 	private static ArrayList<String> parse(String bench) {

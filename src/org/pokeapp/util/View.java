@@ -69,4 +69,9 @@ public class View {
 		this.req.setAttribute("gameId", gameId);
 		View.forward("WEB-INF/jsp/board.jsp", this.req, this.res);
 	}
+
+	public void hand(ArrayList<Integer> hand) {
+		this.req.setAttribute("hand", hand);
+		View.forward("WEB-INF/jsp/hand.jsp", this.req, this.res);
+	}
 }
