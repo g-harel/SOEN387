@@ -3,6 +3,7 @@ package org.pokeapp.gateways;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -13,6 +14,14 @@ public class ChallengeRDG {
 	public static final int STATUS_REFUSED = 1;
 	public static final int STATUS_WITHDRAWN = 2;
 	public static final int STATUS_ACCEPTED = 3;
+
+	protected static ChallengeRDG readResultSet(ResultSet resultSet) throws SQLException {
+		int id = resultSet.getInt("id");
+		int challenger = resultSet.getInt("challenger");
+		int challengee = resultSet.getInt("challengee");
+		int status = resultSet.getInt("challenge_status");
+		return new ChallengeRDG(id, challenger, challengee, status);
+	}
 
 	public static ChallengeRDG insert(int challenger, int challengee) {
 		ChallengeRDG c = null;
@@ -58,12 +67,7 @@ public class ChallengeRDG {
 			);
 
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
-				int challenger = resultSet.getInt("challenger");
-				int challengee = resultSet.getInt("challengee");
-				int status = resultSet.getInt("challenge_status");
-				ChallengeRDG c = new ChallengeRDG(id, challenger, challengee, status);
-				challenges.add(c);
+				challenges.add(ChallengeRDG.readResultSet(resultSet));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,10 +92,43 @@ public class ChallengeRDG {
 
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				int challenger = resultSet.getInt("challenger");
-				int challengee = resultSet.getInt("challengee");
-				int status = resultSet.getInt("challenge_status");
-				c = new ChallengeRDG(id, challenger, challengee, status);
+				c = ChallengeRDG.readResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Database.closeConnection(conn);
+		}
+
+		return c;
+	}
+	
+	public static ChallengeRDG updateStatus(int id, int status) {
+		ChallengeRDG c = null;
+		Connection conn = null;
+
+		try {
+			conn = Database.getConnection();
+
+			PreparedStatement updateStatement = conn.prepareStatement(
+				"UPDATE challenges SET challenge_status=? WHERE id=? LIMIT 1;"
+			);
+			updateStatement.setInt(1, status);
+			updateStatement.setInt(2, id);
+			
+			int touched = updateStatement.executeUpdate();
+			if (touched == 0) {
+				return null;
+			}
+
+			PreparedStatement statement = conn.prepareStatement(
+				"SELECT * FROM challenges WHERE id=? LIMIT 1;"
+			);
+			statement.setInt(1, id);
+
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				c = ChallengeRDG.readResultSet(resultSet);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

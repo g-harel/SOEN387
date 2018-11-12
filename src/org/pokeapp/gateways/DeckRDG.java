@@ -5,26 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.pokeapp.util.Database;
-
-class Card {
-	private String type;
-	private String name;
-
-	public Card(String type, String name) {
-		this.type = type;
-		this.name = name;
-	}
-
-	public String getType() {
-		return this.type;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-}
 
 public class DeckRDG {
 	public static DeckRDG insert(int playerId, String cards) {
@@ -112,15 +96,18 @@ public class DeckRDG {
 		return d;
 	}
 
-	private static ArrayList<Card> parse(String cards) throws Exception {
-		ArrayList<Card> c = new ArrayList<Card>();
+	private static ArrayList<Map<String, String>> parse(String cards) throws Exception {
+		ArrayList<Map<String, String>> c = new ArrayList<Map<String, String>>();
 
 		String[] lines = new String(cards).split("\n");
 		for (String line : lines) {
 			if (!line.matches("^[ept] \"[A-Z][a-z]+\"$")) {
 				throw new Exception("Invalid card: " + line);
 			}
-			c.add(new Card(line.substring(0, 1), line.substring(3, line.length()-1)));
+			Map<String, String> card = new HashMap<String, String>();
+			card.put("type", line.substring(0, 1));
+			card.put("name", line.substring(3, line.length()-1));
+			c.add(card);
 		}
 		
 		if (c.size() != 40) {
@@ -132,7 +119,7 @@ public class DeckRDG {
 
 	private int id;
 	private int playerId;
-	private ArrayList<Card> cards;
+	private ArrayList<Map<String, String>> cards;
 
 	private DeckRDG(int id, int playerId, String cards) throws Exception {
 		this.id = id;
@@ -148,7 +135,7 @@ public class DeckRDG {
 		return this.playerId;
 	}
 
-	public ArrayList<Card> getCards() {
-		return (ArrayList<Card>) this.cards.clone();
+	public ArrayList<Map<String, String>> getCards() {
+		return this.cards;
 	}
 }

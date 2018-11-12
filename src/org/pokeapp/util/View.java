@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pokeapp.gateways.ChallengeRDG;
+import org.pokeapp.gateways.DeckRDG;
 import org.pokeapp.gateways.PlayerRDG;
 
 public class View {
@@ -49,5 +50,10 @@ public class View {
 	public void challenges(ArrayList<ChallengeRDG> challenges) {
 		this.req.setAttribute("challenges", challenges);
 		View.forward("WEB-INF/jsp/challenges.jsp", this.req, this.res);
+	}
+	
+	public void deck(DeckRDG deck) {
+		this.req.setAttribute("deck", deck);
+		View.forward("WEB-INF/jsp/deck.jsp", this.req, this.res);
 	}
 }

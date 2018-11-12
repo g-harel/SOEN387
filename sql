@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 # load variables written in secret .config
 source .config
 
