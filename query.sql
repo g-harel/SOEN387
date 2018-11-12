@@ -4,6 +4,10 @@
 
 UPDATE challenges SET challenge_status=2 WHERE id=1 LIMIT 1;
 
+INSERT INTO games () VALUES ();
+
 SELECT * FROM players;
 SELECT * FROM challenges;
 SELECT * FROM decks;
+SELECT * FROM games;
+SELECT * FROM hands;

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pokeapp.gateways.ChallengeRDG;
 import org.pokeapp.gateways.DeckRDG;
+import org.pokeapp.gateways.GameRDG;
+import org.pokeapp.gateways.HandRDG;
 import org.pokeapp.gateways.PlayerRDG;
 
 public class View {
@@ -55,5 +57,16 @@ public class View {
 	public void deck(DeckRDG deck) {
 		this.req.setAttribute("deck", deck);
 		View.forward("WEB-INF/jsp/deck.jsp", this.req, this.res);
+	}
+	
+	public void games(ArrayList<GameRDG> games) {
+		this.req.setAttribute("games", games);
+		View.forward("WEB-INF/jsp/games.jsp", this.req, this.res);
+	}
+
+	public void board(int gameId, ArrayList<HandRDG> hands) {
+		this.req.setAttribute("hands", hands);
+		this.req.setAttribute("gameId", gameId);
+		View.forward("WEB-INF/jsp/board.jsp", this.req, this.res);
 	}
 }

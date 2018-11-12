@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pokeapp.gateways.ChallengeRDG;
 import org.pokeapp.gateways.DeckRDG;
+import org.pokeapp.gateways.GameRDG;
+import org.pokeapp.gateways.HandRDG;
 import org.pokeapp.util.View;
 
 @WebServlet("/AcceptChallenge")
@@ -50,6 +52,48 @@ public class AcceptChallenge extends HttpServlet {
 		ChallengeRDG acceptedChallenge = ChallengeRDG.updateStatus(Integer.parseInt(challenge), ChallengeRDG.STATUS_ACCEPTED);
 		if (acceptedChallenge == null) {
 			new View(req, res).fail("Could not accept challenge.");
+			return;
+		}
+		
+		GameRDG game = GameRDG.insert();
+		if (game == null) {
+			new View(req, res).fail("Could not create game.");
+			return;
+		}
+		
+		DeckRDG challengerDeck = DeckRDG.findByPlayer(acceptedChallenge.getChallenger());
+		if (challengerDeck == null) {
+			new View(req, res).fail("Could not read challenger deck.");
+			return;
+		}
+		
+		HandRDG challengeeHand = HandRDG.insert(
+			game.getId(),
+			acceptedChallenge.getChallengee(),
+			challengeeDeck.getId(),
+			HandRDG.STATUS_PLAYING,
+			0,
+			challengerDeck.getCards().size(),
+			0,
+			""
+		);
+		if (challengeeHand == null) {
+			new View(req, res).fail("Could not create challengee hand.");
+			return;
+		}
+		
+		HandRDG challengerHand = HandRDG.insert(
+			game.getId(),
+			acceptedChallenge.getChallenger(),
+			challengerDeck.getId(),
+			HandRDG.STATUS_PLAYING,
+			0,
+			challengerDeck.getCards().size(),
+			0,
+			""
+		);
+		if (challengerHand == null) {
+			new View(req, res).fail("Could not create challenger hand.");
 			return;
 		}
 
