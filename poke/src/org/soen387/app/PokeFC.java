@@ -134,7 +134,8 @@ public class PokeFC extends Servlet {
 		final File fileUploadDir = new File(Registry.getString("file.uploadDir"));
 		if (!fileUploadDir.exists()) {
 			if (!fileUploadDir.mkdirs())
-				throw new ServletException("Could not create file upload directory: " + fileUploadDir.getAbsolutePath());
+				System.out.println("????");
+				// throw new ServletException("Could not create file upload directory: " + fileUploadDir.getAbsolutePath());
 		}
 		getServletContext().setAttribute("fileUploadDirectory", fileUploadDir);
 		

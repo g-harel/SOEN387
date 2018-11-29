@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# load variables written in secret .config
+source .config
+
+# open persistent tunnel to remote
+export SSHPASS="$DB_PASSWORD"
+sshpass -e ssh -L $DB_PORT:$DB_HOST:$DB_PORT $DB_USERNAME@dumbledore.encs.concordia.ca
