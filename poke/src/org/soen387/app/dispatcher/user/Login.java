@@ -10,8 +10,6 @@ import org.dsrg.soenea.domain.command.CommandException;
 import org.soen387.dom.command.user.LoginCommand;
 
 public class Login extends Dispatcher {
-
-	@Override
 	public void execute() throws ServletException, IOException {
 		LoginCommand c = new LoginCommand(myHelper);
 		try {
@@ -23,5 +21,4 @@ public class Login extends Dispatcher {
 			forward("/WEB-INF/jsp/fail.jsp");
 		}
 	}
-
 }

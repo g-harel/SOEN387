@@ -13,9 +13,21 @@ import org.dsrg.soenea.uow.UoW;
 import org.soen387.dom.command.user.RegisterCommand;
 
 public class Register extends Dispatcher {
-
-	@Override
 	public void execute() throws ServletException, IOException {
+		String user = myRequest.getParameter("user");
+		if (user == null) {
+			myRequest.setAttribute("message", "no user param");
+			forward("/WEB-INF/jsp/fail.jsp");
+			return;
+		}
+
+		String pass = myRequest.getParameter("pass");
+		if (pass == null) {
+			myRequest.setAttribute("message", "no pass param");
+			forward("/WEB-INF/jsp/fail.jsp");
+			return;
+		}
+
 		RegisterCommand c = new RegisterCommand(myHelper);
 		try {
 			myRequest.getSession(true).invalidate();
@@ -28,10 +40,9 @@ public class Register extends Dispatcher {
 				myHelper.setRequestAttribute("message", e.getMessage());
 				forward("/WEB-INF/jsp/fail.jsp");
 			}
-			
+
 		} catch (CommandException e) {
 			forward("/WEB-INF/jsp/fail.jsp");
 		}
 	}
-
 }

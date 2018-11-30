@@ -242,6 +242,7 @@ public class TestSuite {
 		RenewDatabase.main(null);
 	}
 
+	// PASS
 	@Test
 	public void testRegisterNoInfo() {
 		try {
