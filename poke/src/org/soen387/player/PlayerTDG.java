@@ -1,4 +1,4 @@
-package org.soen387.domain.model.player;
+package org.soen387.player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +14,13 @@ public class PlayerTDG {
 
 	private static final String CREATE =
 		"CREATE TABLE IF NOT EXISTS " + PlayerTDG.TABLE + " (" +
-		"    id   LONG         NOT NULL AUTO_INCREMENT,      " +
+		"    id   INT          NOT NULL AUTO_INCREMENT,      " +
 		"    user VARCHAR(128) NOT NULL,                     " +
 		"    pass VARCHAR(128) NOT NULL,                     " +
-		"    PRIMARY_KEY(id),                                " +
-		"    CONSTRAINT uq_user UNIQUE(user)                 " +
+		"    PRIMARY KEY (id),                               " +
+		"    CONSTRAINT uq_user UNIQUE (user)                " +
 		") ENGINE=InnoDB;                                    ";
-	private static final String DROP = "DROP TABLE " + PlayerTDG.TABLE;
+	private static final String DROP = "DROP TABLE IF EXISTS " + PlayerTDG.TABLE;
 
 	private static final String INSERT = "INSERT INTO " + PlayerTDG.TABLE + " (id, version, user, pass) VALUES (?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE " + PlayerTDG.TABLE + " SET version=version+1, user=?, pass=? WHERE id=? AND version=?";
@@ -28,6 +28,7 @@ public class PlayerTDG {
 
 	private static final String FINDALL = "SELECT * FROM " + PlayerTDG.TABLE;
 	private static final String FIND = "SELECT * FROM " + PlayerTDG.TABLE + " WHERE id=?";
+	private static final String FINDU = "SELECT * FROM " + PlayerTDG.TABLE + " WHERE user=?";
 
 	//
 
@@ -102,6 +103,17 @@ public class PlayerTDG {
 
 		PreparedStatement s = c.prepareStatement(PlayerTDG.FIND);
 		s.setLong(1, id);
+
+		ResultSet rs = SQLLogger.processQuery(s);
+		s.close();
+		return rs;
+	}
+	
+	public static ResultSet find(String user) throws SQLException {
+		SoenEAConnection c = DbRegistry.getDbConnection();
+
+		PreparedStatement s = c.prepareStatement(PlayerTDG.FINDU);
+		s.setString(1, user);
 
 		ResultSet rs = SQLLogger.processQuery(s);
 		s.close();

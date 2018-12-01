@@ -1,4 +1,4 @@
-package org.soen387.domain.model.player;
+package org.soen387.player;
 
 import org.dsrg.soenea.domain.DomainObjectCreationException;
 import org.dsrg.soenea.domain.MapperException;

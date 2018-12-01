@@ -1,0 +1,31 @@
+package org.soen387.player;
+
+import org.dsrg.soenea.domain.command.CommandError;
+import org.dsrg.soenea.domain.command.CommandException;
+import org.dsrg.soenea.domain.command.impl.Command;
+import org.dsrg.soenea.domain.helper.Helper;
+
+public class PlayerRegisterCommand extends Command {
+	public Player currentPlayer = null;
+	
+	public PlayerRegisterCommand(Helper helper) {
+		super(helper);
+	}
+
+	public void process() throws CommandException {	
+		String user = this.helper.getString("user");
+		String pass = this.helper.getString("pass");
+		
+		if (user == null || pass == null) throw new CommandException("missing user and/or pass");
+
+		try {
+			this.currentPlayer = PlayerFactory.createNew(user, pass);		
+		} catch (Exception e) {
+			throw new CommandException("can't create", e);
+		}
+	}
+
+	public void setUp() throws CommandException {}
+
+	public void tearDown() throws CommandError {}
+}

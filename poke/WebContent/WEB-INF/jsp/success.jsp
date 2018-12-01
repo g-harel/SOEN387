@@ -2,6 +2,5 @@
     pageEncoding="UTF-8"%>
 {
 	"status":"success",
- 	"message":"${message}",
- 	"notifications":"${notifications}"
+ 	"message":"${message}"
 }

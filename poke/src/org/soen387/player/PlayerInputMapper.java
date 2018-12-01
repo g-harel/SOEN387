@@ -1,4 +1,4 @@
-package org.soen387.domain.model.player;
+package org.soen387.player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,5 +45,9 @@ public class PlayerInputMapper {
 		} catch (ObjectRemovedException e) {} 
 
 		return PlayerInputMapper.getPlayer(PlayerTDG.find(id));
+	}
+	
+	public static Player find(String user) throws SQLException, MapperException {
+		return PlayerInputMapper.getPlayer(PlayerTDG.find(user));
 	}
 }
