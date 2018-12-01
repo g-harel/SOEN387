@@ -10,7 +10,7 @@ import org.dsrg.soenea.application.servlet.impl.RequestAttributes;
 import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.command.CommandException;
 import org.dsrg.soenea.uow.UoW;
-import org.soen387.dom.command.user.RegisterCommand;
+import org.soen387.domain.command.user.RegisterCommand;
 
 public class Register extends Dispatcher {
 	public void execute() throws ServletException, IOException {

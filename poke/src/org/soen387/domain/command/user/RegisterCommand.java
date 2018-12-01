@@ -1,4 +1,4 @@
-package org.soen387.dom.command.user;
+package org.soen387.domain.command.user;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import org.dsrg.soenea.domain.role.impl.GuestRole;
 import org.dsrg.soenea.domain.user.IUser;
 import org.dsrg.soenea.domain.user.UserFactory;
 import org.dsrg.soenea.domain.user.mapper.UserInputMapper;
-import org.soen387.dom.model.role.RegisteredRole;
+import org.soen387.domain.model.role.RegisteredRole;
 
 public class RegisterCommand extends ValidatorCommand {
 
@@ -34,7 +34,7 @@ public class RegisterCommand extends ValidatorCommand {
 	}
 
 	@Override
-	public void process() throws CommandException {
+	public void process() throws CommandException {		
 		try {
 			
 			try{

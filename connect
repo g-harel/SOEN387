@@ -3,6 +3,19 @@
 # load variables written in secret .config
 source .config
 
+docker run \
+    --name SOEN387 \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=$DB_PASSWORD \
+    -e MYSQL_DATABASE=$DB_USERNAME \
+    -e MYSQL_USER=$DB_USERNAME \
+    -e MYSQL_PASSWORD=$DB_PASSWORD \
+    mysql
+
+docker rm SOEN387
+
+exit 0
+
 # open persistent tunnel to remote
 export SSHPASS="$DB_PASSWORD"
 sshpass -e ssh -L $DB_PORT:$DB_HOST:$DB_PORT $DB_USERNAME@dumbledore.encs.concordia.ca

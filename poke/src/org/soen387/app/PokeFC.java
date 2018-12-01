@@ -38,6 +38,8 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
+import org.soen387.domain.model.player.Player;
+import org.soen387.domain.model.player.PlayerOutputMapper;
 
 @WebServlet("/PokeServlet")
 public class PokeFC extends Servlet {
@@ -52,6 +54,12 @@ public class PokeFC extends Servlet {
 	protected ThreadLocal<Helper> helper = new ThreadLocal<Helper>();
 	
 	private static String defaultCommand;
+	
+	public static void setupUoW() {
+		MapperFactory myDomain2MapperMapper = new MapperFactory();
+		myDomain2MapperMapper.addMapping(Player.class, PlayerOutputMapper.class);
+		UoW.initMapperFactory(myDomain2MapperMapper);
+	} 
 	
 	
 	protected String getDefaultCommand() {
@@ -143,12 +151,6 @@ public class PokeFC extends Servlet {
 		
 		setupUoW();
 	}
-	
-	 public static void setupUoW() {
-		 MapperFactory myDomain2MapperMapper = new MapperFactory();
-		 myDomain2MapperMapper.addMapping(User.class, UserOutputMapper.class);
-		 UoW.initMapperFactory(myDomain2MapperMapper);
-	 } 
 	
 
 	/** 

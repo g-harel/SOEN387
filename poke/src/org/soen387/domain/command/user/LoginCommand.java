@@ -1,4 +1,4 @@
-package org.soen387.dom.command.user;
+package org.soen387.domain.command.user;
 
 import java.sql.SQLException;
 
