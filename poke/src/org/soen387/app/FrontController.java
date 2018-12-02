@@ -17,12 +17,12 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
-import org.soen387.dom.deck.DeckManageDispatcher;
+import org.soen387.app.dispatcher.ManageDeckDispatcher;
+import org.soen387.app.dispatcher.LoginDispatcher;
+import org.soen387.app.dispatcher.LogoutDispatcher;
+import org.soen387.app.dispatcher.RegisterDispatcher;
 import org.soen387.dom.player.Player;
-import org.soen387.dom.player.PlayerLoginDispatcher;
-import org.soen387.dom.player.PlayerLogoutDispatcher;
 import org.soen387.dom.player.PlayerOutputMapper;
-import org.soen387.dom.player.PlayerRegisterDispatcher;
 
 @WebServlet("/Poke/*")
 public class FrontController extends Servlet {
@@ -85,10 +85,10 @@ public class FrontController extends Servlet {
 	}
 
 	private static Dispatcher getDispatcher(String path) throws Exception {
-		if (FrontController.match("/Player/Register", path)) return new PlayerRegisterDispatcher();
-		if (FrontController.match("/Player/Login", path)) return new PlayerLoginDispatcher();
-		if (FrontController.match("/Player/Logout", path)) return new PlayerLogoutDispatcher();
-		if (FrontController.match("/Deck", path)) return new DeckManageDispatcher();
+		if (FrontController.match("/Player/Register", path)) return new RegisterDispatcher();
+		if (FrontController.match("/Player/Login", path)) return new LoginDispatcher();
+		if (FrontController.match("/Player/Logout", path)) return new LogoutDispatcher();
+		if (FrontController.match("/Deck", path)) return new ManageDeckDispatcher();
 		// if (FrontController.match("/Player", path)) return new PlayerListDispatcher();
 
 		// TODO match groups (https://www.tutorialspoint.com/java/java_regular_expressions.htm)

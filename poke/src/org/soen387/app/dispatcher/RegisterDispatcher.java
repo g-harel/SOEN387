@@ -1,4 +1,4 @@
-package org.soen387.dom.player;
+package org.soen387.app.dispatcher;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 import org.dsrg.soenea.application.servlet.impl.RequestAttributes;
 import org.dsrg.soenea.uow.UoW;
 
-public class PlayerRegisterDispatcher extends Dispatcher {
+public class RegisterDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
-		PlayerRegisterCommand c = new PlayerRegisterCommand(myHelper);
+		org.soen387.app.command.RegisterCommand c = new org.soen387.app.command.RegisterCommand(myHelper);
 		try {
 			myRequest.getSession(true).invalidate();
 			c.execute();

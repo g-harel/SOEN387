@@ -1,4 +1,4 @@
-package org.soen387.dom.player;
+package org.soen387.app.dispatcher;
 
 import java.io.IOException;
 
@@ -7,10 +7,11 @@ import javax.servlet.ServletException;
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 import org.dsrg.soenea.application.servlet.impl.RequestAttributes;
 import org.dsrg.soenea.domain.command.CommandException;
+import org.soen387.app.command.LoginCommand;
 
-public class PlayerLoginDispatcher extends Dispatcher {
+public class LoginDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
-		PlayerLoginCommand c = new PlayerLoginCommand(myHelper);
+		LoginCommand c = new LoginCommand(myHelper);
 		try {
 			myRequest.getSession(true).invalidate();
 			c.execute();
