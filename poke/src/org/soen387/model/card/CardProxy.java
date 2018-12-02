@@ -1,4 +1,4 @@
-package org.soen387.dom.card;
+package org.soen387.model.card;
 
 import org.dsrg.soenea.domain.DomainObjectCreationException;
 import org.dsrg.soenea.domain.MapperException;
@@ -30,6 +30,10 @@ public class CardProxy extends DomainObjectProxy<Long, Card> implements ICard {
 	public String getName() {
 		return this.getInnerObject().getName();
 	}
+	
+	public String getBase() {
+		return this.getInnerObject().getBase();
+	}
 
 	//
 
@@ -39,5 +43,9 @@ public class CardProxy extends DomainObjectProxy<Long, Card> implements ICard {
 
 	public void setName(String pass) {
 		this.getInnerObject().setName(pass);
+	}
+	
+	public void setBase(String base) {
+		this.getInnerObject().setBase(base);
 	}
 }

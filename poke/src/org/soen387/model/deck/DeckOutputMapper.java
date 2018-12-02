@@ -1,22 +1,22 @@
-package org.soen387.dom.card;
+package org.soen387.model.deck;
 
 import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.mapper.GenericOutputMapper;
 import org.dsrg.soenea.domain.mapper.LostUpdateException;
 
-public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
-	public void insert(Card d) throws MapperException {
+public class DeckOutputMapper extends GenericOutputMapper<Long, Deck> {
+	public void insert(Deck d) throws MapperException {
 		try {
-			CardTDG.insert(d.getId(), d.getVersion(), d.getDeckId(), d.getType(), d.getName());
+			DeckTDG.insert(d.getId(), d.getVersion());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MapperException("insert", e);
 		}
 	}
 
-	public void update(Card d) throws MapperException {
+	public void update(Deck d) throws MapperException {
 		try {
-			int c = CardTDG.update(d.getId(), d.getVersion(), d.getType(), d.getName());
+			int c = DeckTDG.update(d.getId(), d.getVersion());
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
@@ -25,9 +25,9 @@ public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
 		}
 	}
 
-	public void delete(Card d) throws MapperException {
+	public void delete(Deck d) throws MapperException {
 		try {
-			int c = CardTDG.delete(d.getId(), d.getVersion());
+			int c = DeckTDG.delete(d.getId(), d.getVersion());
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {

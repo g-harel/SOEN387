@@ -1,4 +1,4 @@
-package org.soen387.dom.card;
+package org.soen387.model.card;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,8 @@ public class CardInputMapper {
 			rs.getLong("version"),
 			rs.getLong("deck_id"),
 			rs.getString("type"),
-			rs.getString("name")
+			rs.getString("name"),
+			rs.getString("base")
 		);
 	}
 

@@ -1,22 +1,22 @@
-package org.soen387.dom.player;
+package org.soen387.model.card;
 
 import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.mapper.GenericOutputMapper;
 import org.dsrg.soenea.domain.mapper.LostUpdateException;
 
-public class PlayerOutputMapper extends GenericOutputMapper<Long, Player> {
-	public void insert(Player d) throws MapperException {
+public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
+	public void insert(Card d) throws MapperException {
 		try {
-			PlayerTDG.insert(d.getId(), d.getVersion(), d.getUser(), d.getPass(), d.getDeckId());
+			CardTDG.insert(d.getId(), d.getVersion(), d.getDeckId(), d.getType(), d.getName(), d.getBase());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MapperException("insert", e);
 		}
 	}
 
-	public void update(Player d) throws MapperException {
+	public void update(Card d) throws MapperException {
 		try {
-			int c = PlayerTDG.update(d.getId(), d.getVersion(), d.getUser(), d.getPass(), d.getDeckId());
+			int c = CardTDG.update(d.getId(), d.getVersion(), d.getType(), d.getName(), d.getBase());
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
@@ -25,9 +25,9 @@ public class PlayerOutputMapper extends GenericOutputMapper<Long, Player> {
 		}
 	}
 
-	public void delete(Player d) throws MapperException {
+	public void delete(Card d) throws MapperException {
 		try {
-			int c = PlayerTDG.delete(d.getId(), d.getVersion());
+			int c = CardTDG.delete(d.getId(), d.getVersion());
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {

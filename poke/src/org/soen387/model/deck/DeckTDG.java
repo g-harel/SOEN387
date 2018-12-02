@@ -1,4 +1,4 @@
-package org.soen387.dom.deck;
+package org.soen387.model.deck;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class DeckTDG {
 		"CREATE TABLE IF NOT EXISTS " + DeckTDG.TABLE + " (" +
 		"    id      INT          NOT NULL AUTO_INCREMENT,   " +
 		"    version INT          NOT NULL,                  " +
-		"    PRIMARY KEY (id),                               " +
+		"    PRIMARY KEY (id)                                " +
 		") ENGINE=InnoDB;                                    ";
 	private static final String DROP = "DROP TABLE IF EXISTS " + DeckTDG.TABLE;
 

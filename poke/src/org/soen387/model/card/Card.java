@@ -1,4 +1,4 @@
-package org.soen387.dom.card;
+package org.soen387.model.card;
 
 import org.dsrg.soenea.domain.DomainObject;
 
@@ -6,12 +6,14 @@ public class Card extends DomainObject<Long> implements ICard {
 	private long deckId;
 	private String type;
 	private String name;
+	private String base;
 
-	protected Card(Long id, long version, long deckId, String type, String name) {
+	protected Card(Long id, long version, long deckId, String type, String name, String base) {
 		super(id, version);
 		this.deckId = deckId;
 		this.type = type;
 		this.name = name;
+		this.base = base;
 	}
 
 	//
@@ -27,6 +29,10 @@ public class Card extends DomainObject<Long> implements ICard {
 	public String getName() {
 		return this.name;
 	}
+	
+	public String getBase() {
+		return this.base;
+	}
 
 	//
 
@@ -36,5 +42,9 @@ public class Card extends DomainObject<Long> implements ICard {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setBase(String base) {
+		this.base = base;
 	}
 }

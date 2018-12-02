@@ -16,6 +16,7 @@ public class LogoutDispatcher extends Dispatcher {
 		}
 
 		myRequest.getSession(true).invalidate();
+
 		myHelper.setRequestAttribute("message", "logged out");
 		forward("/WEB-INF/jsp/success.jsp");
 	}

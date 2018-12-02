@@ -1,4 +1,4 @@
-package org.soen387.dom.deck;
+package org.soen387.model.deck;
 
 import java.sql.SQLException;
 

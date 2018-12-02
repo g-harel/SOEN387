@@ -18,11 +18,16 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.app.dispatcher.ManageDeckDispatcher;
+import org.soen387.app.dispatcher.PlayerListDispatcher;
 import org.soen387.app.dispatcher.LoginDispatcher;
 import org.soen387.app.dispatcher.LogoutDispatcher;
 import org.soen387.app.dispatcher.RegisterDispatcher;
-import org.soen387.dom.player.Player;
-import org.soen387.dom.player.PlayerOutputMapper;
+import org.soen387.model.card.Card;
+import org.soen387.model.card.CardOutputMapper;
+import org.soen387.model.deck.Deck;
+import org.soen387.model.deck.DeckOutputMapper;
+import org.soen387.model.player.Player;
+import org.soen387.model.player.PlayerOutputMapper;
 
 @WebServlet("/Poke/*")
 public class FrontController extends Servlet {
@@ -47,6 +52,8 @@ public class FrontController extends Servlet {
 
 		MapperFactory myDomain2MapperMapper = new MapperFactory();
 		myDomain2MapperMapper.addMapping(Player.class, PlayerOutputMapper.class);
+		myDomain2MapperMapper.addMapping(Deck.class, DeckOutputMapper.class);
+		myDomain2MapperMapper.addMapping(Card.class, CardOutputMapper.class);
 		UoW.initMapperFactory(myDomain2MapperMapper);
 	}
 
@@ -89,7 +96,7 @@ public class FrontController extends Servlet {
 		if (FrontController.match("/Player/Login", path)) return new LoginDispatcher();
 		if (FrontController.match("/Player/Logout", path)) return new LogoutDispatcher();
 		if (FrontController.match("/Deck", path)) return new ManageDeckDispatcher();
-		// if (FrontController.match("/Player", path)) return new PlayerListDispatcher();
+		if (FrontController.match("/Player", path)) return new PlayerListDispatcher();
 
 		// TODO match groups (https://www.tutorialspoint.com/java/java_regular_expressions.htm)
 		// if (FrontController.match("/Deck/(\\d+)", path)) return new DeckManageDispatcher();

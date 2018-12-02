@@ -4,8 +4,8 @@ import org.dsrg.soenea.domain.command.CommandError;
 import org.dsrg.soenea.domain.command.CommandException;
 import org.dsrg.soenea.domain.command.impl.Command;
 import org.dsrg.soenea.domain.helper.Helper;
-import org.soen387.dom.player.Player;
-import org.soen387.dom.player.PlayerFactory;
+import org.soen387.model.player.Player;
+import org.soen387.model.player.PlayerFactory;
 
 public class RegisterCommand extends Command {
 	public Player currentPlayer = null;

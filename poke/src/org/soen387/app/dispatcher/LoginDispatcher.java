@@ -16,6 +16,7 @@ public class LoginDispatcher extends Dispatcher {
 			myRequest.getSession(true).invalidate();
 			c.execute();
 			myRequest.getSession(true).setAttribute(RequestAttributes.CURRENT_USER_ID, c.currentPlayer.getId());
+
 			myHelper.setRequestAttribute("message", "logged in");
 			forward("/WEB-INF/jsp/success.jsp");
 		} catch (CommandException e) {

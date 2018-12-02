@@ -160,6 +160,7 @@ public class TestSuite {
 	}
 	
 	
+	// PASS
 	@Test
 	public void testUploadDeckSuccess() {
 		try {
@@ -188,6 +189,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testUploadDeckFailSmallDeck() {
 		try {
@@ -204,6 +206,7 @@ public class TestSuite {
 		}
 	}
 
+	// PASS
 	@Test
 	public void testUploadDeckFailBigDeck() {
 		try {
@@ -220,6 +223,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testUploadDeckSuccessRecoverFromFail() {
 		try {

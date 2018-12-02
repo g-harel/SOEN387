@@ -4,8 +4,8 @@ import org.dsrg.soenea.domain.command.CommandError;
 import org.dsrg.soenea.domain.command.CommandException;
 import org.dsrg.soenea.domain.command.impl.Command;
 import org.dsrg.soenea.domain.helper.Helper;
-import org.soen387.dom.player.Player;
-import org.soen387.dom.player.PlayerInputMapper;
+import org.soen387.model.player.Player;
+import org.soen387.model.player.PlayerInputMapper;
 
 public class LoginCommand extends Command {
 	public Player currentPlayer = null; 

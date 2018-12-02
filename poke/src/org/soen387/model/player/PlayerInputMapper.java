@@ -1,4 +1,4 @@
-package org.soen387.dom.player;
+package org.soen387.model.player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
