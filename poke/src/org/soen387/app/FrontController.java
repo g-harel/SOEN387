@@ -24,13 +24,14 @@ import org.soen387.player.PlayerRegisterDispatcher;
 @WebServlet("/Poke/*")
 public class FrontController extends Servlet {
 	private static final long serialVersionUID = 1458841306687817284L;
-	
+
 	public static void prepareDbRegistry() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 			MySQLConnectionFactory f = new MySQLConnectionFactory(null, null, null, null);
 			f.defaultInitialization();
+			DbRegistry.setTablePrefix("");
 			DbRegistry.setConFactory(f);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,7 +55,7 @@ public class FrontController extends Servlet {
 
 			DbRegistry.getDbConnection().setAutoCommit(false);
 			DbRegistry.getDbConnection().createStatement().execute("START TRANSACTION;");
-			
+
 			String path = request.getPathInfo();
 			Logging.log("Path: " + path);
 			Dispatcher d = FrontController.getDispatcher(path);
@@ -65,7 +66,7 @@ public class FrontController extends Servlet {
 
 			DbRegistry.getDbConnection().createStatement().execute("ROLLBACK;");
 			DbRegistry.closeDbConnectionIfNeeded();
-			
+
 			ThreadLocalTracker.purgeThreadLocal();
 		} catch (Exception e) {
 			Logging.logError(e);
@@ -73,25 +74,25 @@ public class FrontController extends Servlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/fail.jsp").include(request, response);
 		}
 	}
-	
+
 	private static boolean match(String pattern, String path) {
 		Pattern p = Pattern.compile(pattern);
 		Matcher m = p.matcher(path);
 		return m.matches();
 	}
-	
+
 	private static Dispatcher getDispatcher(String path) throws Exception {
 		if (FrontController.match("/Player/Register", path)) return new PlayerRegisterDispatcher();
 		// if (FrontController.match("Poke/Player/Login", path)) return new PlayerLoginDispatcher();
 		// if (FrontController.match("Poke/Player/Logout", path)) return new PlayerLogoutDispatcher();
 		// if (FrontController.match("Poke/Deck", path)) return new DeckManageDispatcher();
 		// if (FrontController.match("Poke/Player", path)) return new PlayerListDispatcher();
-		
-		// TODO match groups
+
+		// TODO match groups (https://www.tutorialspoint.com/java/java_regular_expressions.htm)
 		// if (FrontController.match("Poke/Deck/(\\d+)", path)) return new DeckManageDispatcher();
 		// if (FrontController.match("Poke/Player/(\\d+)/Challenge", path)) return new ChallengePlayerDispatcher();
 		// if (FrontController.match("Poke/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
 
-		throw new Exception("no matching dispatcher");
+		throw new Exception("no matching dispatcher for '" + path + "'");
 	}
 }

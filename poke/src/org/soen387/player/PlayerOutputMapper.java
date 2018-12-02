@@ -9,6 +9,7 @@ public class PlayerOutputMapper extends GenericOutputMapper<Long, Player> {
 		try {
 			PlayerTDG.insert(d.getId(), d.getVersion(), d.getUser(), d.getPass());
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new MapperException("insert player", e);
 		}
 	}
@@ -19,6 +20,7 @@ public class PlayerOutputMapper extends GenericOutputMapper<Long, Player> {
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new MapperException("update player", e);
 		}
 	}
@@ -29,6 +31,7 @@ public class PlayerOutputMapper extends GenericOutputMapper<Long, Player> {
 			if (c == 0) throw new LostUpdateException((String)null);
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new MapperException("delete player", e);
 		}
 	}

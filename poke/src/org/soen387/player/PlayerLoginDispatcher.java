@@ -15,8 +15,11 @@ public class PlayerLoginDispatcher extends Dispatcher {
 			myRequest.getSession(true).invalidate();
 			c.execute();
 			myRequest.getSession(true).setAttribute(RequestAttributes.CURRENT_USER_ID, c.currentPlayer.getId());
+			myHelper.setRequestAttribute("message", "registered");
 			forward("/WEB-INF/jsp/success.jsp");
 		} catch (CommandException e) {
+			e.printStackTrace();
+			myHelper.setRequestAttribute("message", e.getMessage());
 			forward("/WEB-INF/jsp/fail.jsp");
 		}
 	}

@@ -14,9 +14,10 @@ public class PlayerTDG {
 
 	private static final String CREATE =
 		"CREATE TABLE IF NOT EXISTS " + PlayerTDG.TABLE + " (" +
-		"    id   INT          NOT NULL AUTO_INCREMENT,      " +
-		"    user VARCHAR(128) NOT NULL,                     " +
-		"    pass VARCHAR(128) NOT NULL,                     " +
+		"    id      INT          NOT NULL AUTO_INCREMENT,   " +
+		"    version INT          NOT NULL,                  " +
+		"    user    VARCHAR(128) NOT NULL,                  " +
+		"    pass    VARCHAR(128) NOT NULL,                  " +
 		"    PRIMARY KEY (id),                               " +
 		"    CONSTRAINT uq_user UNIQUE (user)                " +
 		") ENGINE=InnoDB;                                    ";
@@ -52,8 +53,8 @@ public class PlayerTDG {
 		PreparedStatement s = c.prepareStatement(PlayerTDG.INSERT);
 		s.setLong(1, id);
 		s.setLong(2, version);
-		s.setString(2, user);
-		s.setString(3, pass);
+		s.setString(3, user);
+		s.setString(4, pass);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();

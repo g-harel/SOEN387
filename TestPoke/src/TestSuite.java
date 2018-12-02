@@ -267,6 +267,7 @@ public class TestSuite {
 	}
 
 	@Test
+	// PASS
 	public void testRegisterSuccess() {
 		try {
 			WebClient webClient = new WebClient();
@@ -281,6 +282,7 @@ public class TestSuite {
 	}
 
 	@Test
+	// PASS
 	public void testRegisterDuplicate() {
 		try {
 			WebClient webClient = new WebClient();
