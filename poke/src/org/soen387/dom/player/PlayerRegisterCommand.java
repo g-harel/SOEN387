@@ -7,19 +7,19 @@ import org.dsrg.soenea.domain.helper.Helper;
 
 public class PlayerRegisterCommand extends Command {
 	public Player currentPlayer = null;
-	
+
 	public PlayerRegisterCommand(Helper helper) {
 		super(helper);
 	}
 
-	public void process() throws CommandException {	
+	public void process() throws CommandException {
 		String user = this.helper.getString("user");
 		String pass = this.helper.getString("pass");
-		
+
 		if (user == null || user.equals("") || pass == null || pass.equals("")) throw new CommandException("missing user and/or pass");
 
 		try {
-			this.currentPlayer = PlayerFactory.createNew(user, pass);		
+			this.currentPlayer = PlayerFactory.createNew(user, pass, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException("can't create", e);

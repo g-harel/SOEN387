@@ -27,6 +27,10 @@ public class PlayerProxy extends DomainObjectProxy<Long, Player> implements IPla
 		return this.getInnerObject().getPass();
 	}
 
+	public Long getDeckId() {
+		return this.getInnerObject().getDeckId();
+	}
+
 	//
 
 	public void setUser(String user) {
@@ -35,5 +39,9 @@ public class PlayerProxy extends DomainObjectProxy<Long, Player> implements IPla
 
 	public void setPass(String pass) {
 		this.getInnerObject().setPass(pass);
+	}
+
+	public void setDeckId(Long deckId) {
+		this.getInnerObject().setDeckId(deckId);
 	}
 }

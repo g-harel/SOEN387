@@ -18,13 +18,14 @@ public class PlayerTDG {
 		"    version INT          NOT NULL,                  " +
 		"    user    VARCHAR(128) NOT NULL,                  " +
 		"    pass    VARCHAR(128) NOT NULL,                  " +
+		"    deck_id INT,                                    " +
 		"    PRIMARY KEY (id),                               " +
 		"    CONSTRAINT uq_user UNIQUE (user)                " +
 		") ENGINE=InnoDB;                                    ";
 	private static final String DROP = "DROP TABLE IF EXISTS " + PlayerTDG.TABLE;
 
-	private static final String INSERT = "INSERT INTO " + PlayerTDG.TABLE + " (id, version, user, pass) VALUES (?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE " + PlayerTDG.TABLE + " SET version=version+1, user=?, pass=? WHERE id=? AND version=?";
+	private static final String INSERT = "INSERT INTO " + PlayerTDG.TABLE + " (id, version, user, pass, deck_id) VALUES (?, ?, ?, ?, ?)";
+	private static final String UPDATE = "UPDATE " + PlayerTDG.TABLE + " SET version=version+1, user=?, pass=?, deck_id=? WHERE id=? AND version=?";
 	private static final String DELETE = "DELETE FROM " + PlayerTDG.TABLE + " WHERE id=? AND version=?";
 
 	private static final String FINDALL = "SELECT * FROM " + PlayerTDG.TABLE;
@@ -47,28 +48,34 @@ public class PlayerTDG {
 
 	//
 
-	public static int insert(Long id, long version, String user, String pass) throws SQLException {
+	public static int insert(Long id, long version, String user, String pass, Long deckId) throws SQLException {
 		SoenEAConnection c = DbRegistry.getDbConnection();
+
+		if (deckId == null) deckId = -1L;
 
 		PreparedStatement s = c.prepareStatement(PlayerTDG.INSERT);
 		s.setLong(1, id);
 		s.setLong(2, version);
 		s.setString(3, user);
 		s.setString(4, pass);
+		s.setLong(5, deckId);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();
 		return n;
 	}
 
-	public static int update(Long id, long version, String user, String pass) throws SQLException {
+	public static int update(Long id, long version, String user, String pass, Long deckId) throws SQLException {
 		SoenEAConnection c = DbRegistry.getDbConnection();
+
+		if (deckId == null) deckId = -1L;
 
 		PreparedStatement s = c.prepareStatement(PlayerTDG.UPDATE);
 		s.setString(1, user);
 		s.setString(2, pass);
-		s.setLong(3,  id);
-		s.setLong(4, version);
+		s.setLong(3, deckId);
+		s.setLong(4,  id);
+		s.setLong(5, version);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();
@@ -105,7 +112,7 @@ public class PlayerTDG {
 
 		return SQLLogger.processQuery(s);
 	}
-	
+
 	public static ResultSet find(String user) throws SQLException {
 		SoenEAConnection c = DbRegistry.getDbConnection();
 
