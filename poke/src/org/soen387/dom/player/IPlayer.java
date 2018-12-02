@@ -1,4 +1,4 @@
-package org.soen387.player;
+package org.soen387.dom.player;
 
 import org.dsrg.soenea.domain.interf.IDomainObject;
 

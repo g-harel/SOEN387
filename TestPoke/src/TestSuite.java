@@ -27,8 +27,8 @@ public class TestSuite {
 		RenewDatabase.main(null);
 	}
 	
-	@Test
 	// PASS
+	@Test
 	public void testRegisterNoInfo() {
 		try {
 			WebClient webClient = new WebClient();
@@ -51,8 +51,8 @@ public class TestSuite {
 		}
 	}
 	
-	@Test
 	// PASS
+	@Test
 	public void testRegisterSuccess() {
 		try {
 			WebClient webClient = new WebClient();
@@ -66,8 +66,8 @@ public class TestSuite {
 		}
 	}
 	
-	@Test
 	// PASS
+	@Test
 	public void testRegisterDuplicate() {
 		try {
 			WebClient webClient = new WebClient();
@@ -88,6 +88,7 @@ public class TestSuite {
 
 	
 	
+	// PASS
 	@Test
 	public void testLoginSuccess() {
 		try {
@@ -109,6 +110,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testLoginFail() {
 		try {
@@ -123,6 +125,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testLogoutFail() {
 		try {
@@ -136,6 +139,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testLogoutSuccess() {
 		try {

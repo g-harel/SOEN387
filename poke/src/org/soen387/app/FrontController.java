@@ -17,9 +17,12 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
-import org.soen387.player.Player;
-import org.soen387.player.PlayerOutputMapper;
-import org.soen387.player.PlayerRegisterDispatcher;
+import org.soen387.dom.deck.DeckManageDispatcher;
+import org.soen387.dom.player.Player;
+import org.soen387.dom.player.PlayerLoginDispatcher;
+import org.soen387.dom.player.PlayerLogoutDispatcher;
+import org.soen387.dom.player.PlayerOutputMapper;
+import org.soen387.dom.player.PlayerRegisterDispatcher;
 
 @WebServlet("/Poke/*")
 public class FrontController extends Servlet {
@@ -83,15 +86,15 @@ public class FrontController extends Servlet {
 
 	private static Dispatcher getDispatcher(String path) throws Exception {
 		if (FrontController.match("/Player/Register", path)) return new PlayerRegisterDispatcher();
-		// if (FrontController.match("Poke/Player/Login", path)) return new PlayerLoginDispatcher();
-		// if (FrontController.match("Poke/Player/Logout", path)) return new PlayerLogoutDispatcher();
-		// if (FrontController.match("Poke/Deck", path)) return new DeckManageDispatcher();
-		// if (FrontController.match("Poke/Player", path)) return new PlayerListDispatcher();
+		if (FrontController.match("/Player/Login", path)) return new PlayerLoginDispatcher();
+		if (FrontController.match("/Player/Logout", path)) return new PlayerLogoutDispatcher();
+		if (FrontController.match("/Deck", path)) return new DeckManageDispatcher();
+		// if (FrontController.match("/Player", path)) return new PlayerListDispatcher();
 
 		// TODO match groups (https://www.tutorialspoint.com/java/java_regular_expressions.htm)
-		// if (FrontController.match("Poke/Deck/(\\d+)", path)) return new DeckManageDispatcher();
-		// if (FrontController.match("Poke/Player/(\\d+)/Challenge", path)) return new ChallengePlayerDispatcher();
-		// if (FrontController.match("Poke/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
+		// if (FrontController.match("/Deck/(\\d+)", path)) return new DeckManageDispatcher();
+		// if (FrontController.match("/Player/(\\d+)/Challenge", path)) return new ChallengePlayerDispatcher();
+		// if (FrontController.match("/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
 
 		throw new Exception("no matching dispatcher for '" + path + "'");
 	}

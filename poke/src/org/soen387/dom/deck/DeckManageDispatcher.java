@@ -1,4 +1,4 @@
-package org.soen387.deck;
+package org.soen387.dom.deck;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

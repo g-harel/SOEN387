@@ -1,4 +1,4 @@
-package org.soen387.player;
+package org.soen387.dom.player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,9 +94,7 @@ public class PlayerTDG {
 
 		PreparedStatement s = c.prepareStatement(PlayerTDG.FINDALL);
 
-		ResultSet rs = SQLLogger.processQuery(s);
-		s.close();
-		return rs;
+		return SQLLogger.processQuery(s);
 	}
 
 	public static ResultSet find(Long id) throws SQLException {
@@ -105,9 +103,7 @@ public class PlayerTDG {
 		PreparedStatement s = c.prepareStatement(PlayerTDG.FIND);
 		s.setLong(1, id);
 
-		ResultSet rs = SQLLogger.processQuery(s);
-		s.close();
-		return rs;
+		return SQLLogger.processQuery(s);
 	}
 	
 	public static ResultSet find(String user) throws SQLException {
@@ -116,8 +112,6 @@ public class PlayerTDG {
 		PreparedStatement s = c.prepareStatement(PlayerTDG.FINDU);
 		s.setString(1, user);
 
-		ResultSet rs = SQLLogger.processQuery(s);
-		s.close();
-		return rs;
+		return SQLLogger.processQuery(s);
 	}
 }
