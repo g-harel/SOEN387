@@ -10,7 +10,7 @@ public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
 			CardTDG.insert(d.getId(), d.getVersion(), d.getDeckId(), d.getType(), d.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new MapperException("insert card", e);
+			throw new MapperException("insert", e);
 		}
 	}
 
@@ -21,7 +21,7 @@ public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new MapperException("update card", e);
+			throw new MapperException("update", e);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class CardOutputMapper extends GenericOutputMapper<Long, Card> {
 			d.setVersion(d.getVersion()+1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new MapperException("delete card", e);
+			throw new MapperException("delete", e);
 		}
 	}
 }

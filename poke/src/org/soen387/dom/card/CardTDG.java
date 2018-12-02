@@ -20,7 +20,6 @@ public class CardTDG {
 		"    type    VARCHAR(128) NOT NULL,                  " +
 		"    name    VARCHAR(128) NOT NULL,                  " +
 		"    PRIMARY KEY (id),                               " +
-		"    CONSTRAINT uq_user UNIQUE (user)                " +
 		") ENGINE=InnoDB;                                    ";
 	private static final String DROP = "DROP TABLE IF EXISTS " + CardTDG.TABLE;
 
