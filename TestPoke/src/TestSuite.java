@@ -1120,6 +1120,7 @@ public class TestSuite {
 	}
 	
 
+	// PASS
 	@Test
 	public void testListGamesSuccess() {
 		try {

@@ -3,11 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 {
   "games": [
-    <c:forEach items="${challenges}" var="challenge" varStatus="stat">
+    <c:forEach items="${games}" var="game" varStatus="stat">
       {
-      	"id": <c:out value="${challenge.id}"/>,
-      	"version": <c:out value="${challenge.version}"/>,
-      	"challenger": <c:out value="${challenge.challenger}"/>
+      	"id": <c:out value="${game.id}"/>,
+      	"version": <c:out value="${game.version}"/>,
+      	"players": [
+      	  <c:out value="${game.player1}"/>,
+      	  <c:out value="${game.player2}"/>
+     	]
       }<c:if test="${!stat.last}">,</c:if>
     </c:forEach>
   ]

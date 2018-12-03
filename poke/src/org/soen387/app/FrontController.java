@@ -22,6 +22,7 @@ import org.soen387.app.dispatcher.PlayerListDispatcher;
 import org.soen387.app.dispatcher.ChallengeListDispatcher;
 import org.soen387.app.dispatcher.ChallengePlayerDispatcher;
 import org.soen387.app.dispatcher.ChallengeResponseDispatcher;
+import org.soen387.app.dispatcher.GameListDispatcher;
 import org.soen387.app.dispatcher.LoginDispatcher;
 import org.soen387.app.dispatcher.LogoutDispatcher;
 import org.soen387.app.dispatcher.ManageDeckDispatcher;
@@ -32,6 +33,8 @@ import org.soen387.model.challenge.Challenge;
 import org.soen387.model.challenge.ChallengeOutputMapper;
 import org.soen387.model.deck.Deck;
 import org.soen387.model.deck.DeckOutputMapper;
+import org.soen387.model.game.Game;
+import org.soen387.model.game.GameOutputMapper;
 import org.soen387.model.player.Player;
 import org.soen387.model.player.PlayerOutputMapper;
 
@@ -61,6 +64,7 @@ public class FrontController extends Servlet {
 		myDomain2MapperMapper.addMapping(Deck.class, DeckOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Card.class, CardOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Challenge.class, ChallengeOutputMapper.class);
+		myDomain2MapperMapper.addMapping(Game.class, GameOutputMapper.class);
 		UoW.initMapperFactory(myDomain2MapperMapper);
 	}
 
@@ -122,6 +126,8 @@ public class FrontController extends Servlet {
 
 		if (FrontController.match("/Challenge/(-?\\d+)/(\\w+)", request, "challengeId, action")) return new ChallengeResponseDispatcher();
 		if (FrontController.match("/Challenge", request)) return new ChallengeListDispatcher();
+		
+		if (FrontController.match("/Game", request)) return new GameListDispatcher();
 
 		throw new Exception("no matching dispatcher for '" + request.getPathInfo() + "'");
 	}

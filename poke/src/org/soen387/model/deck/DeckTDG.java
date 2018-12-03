@@ -61,7 +61,7 @@ public class DeckTDG {
 		SoenEAConnection c = DbRegistry.getDbConnection();
 
 		PreparedStatement s = c.prepareStatement(DeckTDG.UPDATE);
-		s.setLong(0,  playerId);
+		s.setLong(1,  playerId);
 		s.setLong(2, id);
 		s.setLong(3, version);
 

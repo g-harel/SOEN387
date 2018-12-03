@@ -10,6 +10,7 @@ import org.soen387.model.card.ICard;
 import org.soen387.model.challenge.Challenge;
 import org.soen387.model.challenge.ChallengeInputMapper;
 import org.soen387.model.challenge.ChallengeOutputMapper;
+import org.soen387.model.game.GameFactory;
 
 public class ChallengeResponseCommand extends Command {
 	public List<ICard> cards;
@@ -56,7 +57,8 @@ public class ChallengeResponseCommand extends Command {
 
 			new ChallengeOutputMapper().update(c);
 			
-			// TODO create game
+			// challenger is player1
+			GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "TODO", c.getChallengee(), Long.parseLong(deckId), "TODO");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException("can't read");
