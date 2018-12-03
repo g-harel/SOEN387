@@ -6,6 +6,7 @@ import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 import org.dsrg.soenea.application.servlet.impl.RequestAttributes;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.app.command.UploadDeckCommand;
+import org.soen387.app.command.ViewDecksCommand;
 
 public class ManageDeckDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
@@ -22,9 +23,11 @@ public class ManageDeckDispatcher extends Dispatcher {
 				myHelper.setRequestAttribute("message", "uploaded");
 				forward("/WEB-INF/jsp/success.jsp");
 			} else if (myRequest.getMethod().equals("GET")) {
-				// TODO view decks
-				myHelper.setRequestAttribute("message", "not implemented");
-				forward("/WEB-INF/jsp/fail.jsp");
+				ViewDecksCommand c = new ViewDecksCommand(myHelper);
+				c.execute();
+				UoW.getCurrent().commit();
+				myHelper.setRequestAttribute("decks", c.decks);
+				forward("/WEB-INF/jsp/decks.jsp");
 			} else {
 				myHelper.setRequestAttribute("message", "bad method");
 				forward("/WEB-INF/jsp/fail.jsp");
