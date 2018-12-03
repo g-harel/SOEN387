@@ -18,7 +18,9 @@ public class ManageDecksDispatcher extends Dispatcher {
 
 		try {			
 			if (myRequest.getMethod().equals("POST")) {
-				new UploadDeckCommand(myHelper).execute();
+				UploadDeckCommand c = new UploadDeckCommand(myHelper);
+				c.playerId = (Long)myRequest.getSession(true).getAttribute(RequestAttributes.CURRENT_USER_ID);
+				c.execute();
 				UoW.getCurrent().commit();
 				myHelper.setRequestAttribute("message", "uploaded");
 				forward("/WEB-INF/jsp/success.jsp");

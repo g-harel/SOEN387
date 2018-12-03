@@ -11,9 +11,12 @@ import org.soen387.model.card.CardFactory;
 import org.soen387.model.deck.Deck;
 import org.soen387.model.deck.DeckFactory;
 import org.soen387.model.player.Player;
+import org.soen387.model.player.PlayerInputMapper;
+import org.soen387.model.player.PlayerOutputMapper;
 
 public class UploadDeckCommand extends Command {
 	public Player currentPlayer = null;
+	public long playerId;
 
 	public UploadDeckCommand(Helper helper) {
 		super(helper);
@@ -40,6 +43,10 @@ public class UploadDeckCommand extends Command {
 				}
 				CardFactory.createNew(deck.getId(), m.group(1), m.group(2), m.group(3));
 			}
+			
+			Player p = PlayerInputMapper.find(this.playerId);
+			p.setDeckId(deck.getId());
+			new PlayerOutputMapper().update(p);
 		} catch (CommandException e) {
 			throw e;
 		} catch (Exception e) {
