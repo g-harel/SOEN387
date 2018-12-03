@@ -38,11 +38,7 @@ public class UploadDeckCommand extends Command {
 				if (!m.matches()) {
 					throw new CommandException("invalid card '" + line + "'");
 				}
-				String base = m.group(2);
-				if (base == null) {
-					base = "";
-				}
-				CardFactory.createNew(deck.getId(), m.group(0), m.group(1), m.group(2));
+				CardFactory.createNew(deck.getId(), m.group(1), m.group(2), m.group(3));
 			}
 		} catch (CommandException e) {
 			throw e;

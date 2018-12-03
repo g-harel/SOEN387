@@ -4,6 +4,8 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import org.dsrg.soenea.application.servlet.dispatcher.Dispatcher;
 import org.dsrg.soenea.application.servlet.impl.RequestAttributes;
+import org.dsrg.soenea.uow.UoW;
+import org.soen387.app.command.PlayerListCommand;
 
 public class PlayerListDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
@@ -13,7 +15,16 @@ public class PlayerListDispatcher extends Dispatcher {
 			return;
 		}
 
-		myRequest.setAttribute("message", "not implemented");
-		forward("/WEB-INF/jsp/fail.jsp");
+		try {
+			PlayerListCommand c = new PlayerListCommand(myHelper);
+			c.execute();
+			UoW.getCurrent().commit();
+			myHelper.setRequestAttribute("players", c.players);
+			forward("/WEB-INF/jsp/players.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+			myHelper.setRequestAttribute("message", e.getMessage());
+			forward("/WEB-INF/jsp/fail.jsp");
+		}
 	}
 }

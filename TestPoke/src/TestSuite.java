@@ -86,8 +86,6 @@ public class TestSuite {
 	}
 
 
-	
-	
 	// PASS
 	@Test
 	public void testLoginSuccess() {
@@ -288,7 +286,8 @@ public class TestSuite {
 			
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewDeckSuccess() {
 		try {
@@ -325,7 +324,8 @@ public class TestSuite {
 			
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewDeckFail() {
 		try {
@@ -346,7 +346,8 @@ public class TestSuite {
 			
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testListPlayersSuccess() {
 		try {
@@ -380,7 +381,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testListPlayersFailure() {
 		try {

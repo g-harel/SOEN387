@@ -49,7 +49,7 @@ public class CardInputMapper {
 		return CardInputMapper.getCard(CardTDG.find(id));
 	}
 
-	public static Card findByDeck(long deckId) throws SQLException, MapperException {
-		return CardInputMapper.getCard(CardTDG.findByDeck(deckId));
+	public static List<ICard> findByDeck(long deckId) throws SQLException, MapperException {
+		return CardInputMapper.getCards(CardTDG.findByDeck(deckId));
 	}
 }

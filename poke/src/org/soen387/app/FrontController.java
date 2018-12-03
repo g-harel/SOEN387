@@ -17,10 +17,11 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
-import org.soen387.app.dispatcher.ManageDeckDispatcher;
+import org.soen387.app.dispatcher.ManageDecksDispatcher;
 import org.soen387.app.dispatcher.PlayerListDispatcher;
 import org.soen387.app.dispatcher.LoginDispatcher;
 import org.soen387.app.dispatcher.LogoutDispatcher;
+import org.soen387.app.dispatcher.ManageDeckDispatcher;
 import org.soen387.app.dispatcher.RegisterDispatcher;
 import org.soen387.model.card.Card;
 import org.soen387.model.card.CardOutputMapper;
@@ -66,9 +67,8 @@ public class FrontController extends Servlet {
 			DbRegistry.getDbConnection().setAutoCommit(false);
 			DbRegistry.getDbConnection().createStatement().execute("START TRANSACTION;");
 
-			String path = request.getPathInfo();
-			Logging.log("Path: " + path);
-			Dispatcher d = FrontController.getDispatcher(path);
+			Logging.log("Path: " + request.getPathInfo());
+			Dispatcher d = FrontController.getDispatcher(request);
 			d.init(request, response);
 			d.execute();
 
@@ -85,24 +85,37 @@ public class FrontController extends Servlet {
 		}
 	}
 
-	private static boolean match(String pattern, String path) {
+	private static boolean match(String pattern, HttpServletRequest request, String pathParams) {
+		String path = request.getPathInfo();
 		Pattern p = Pattern.compile(pattern);
 		Matcher m = p.matcher(path);
+		
+		if (m.matches() && pathParams != null && !pathParams.equals("")) {
+			String[] params = pathParams.split(", ");
+			for (int i = 0; i < params.length; i++) {
+				request.setAttribute(params[i], m.group(i+1));
+			}
+		}
+		
 		return m.matches();
 	}
 
-	private static Dispatcher getDispatcher(String path) throws Exception {
-		if (FrontController.match("/Player/Register", path)) return new RegisterDispatcher();
-		if (FrontController.match("/Player/Login", path)) return new LoginDispatcher();
-		if (FrontController.match("/Player/Logout", path)) return new LogoutDispatcher();
-		if (FrontController.match("/Deck", path)) return new ManageDeckDispatcher();
-		if (FrontController.match("/Player", path)) return new PlayerListDispatcher();
+	private static boolean match(String pattern, HttpServletRequest request) {
+		return FrontController.match(pattern, request, "");
+	}
 
-		// TODO match groups (https://www.tutorialspoint.com/java/java_regular_expressions.htm)
-		// if (FrontController.match("/Deck/(\\d+)", path)) return new DeckManageDispatcher();
+	private static Dispatcher getDispatcher(HttpServletRequest request) throws Exception {
+		if (FrontController.match("/Player/Register", request)) return new RegisterDispatcher();
+		if (FrontController.match("/Player/Login", request)) return new LoginDispatcher();
+		if (FrontController.match("/Player/Logout", request)) return new LogoutDispatcher();
+		if (FrontController.match("/Player", request)) return new PlayerListDispatcher();
+		
+		if (FrontController.match("/Deck/(\\d+)", request, "deckId")) return new ManageDeckDispatcher();
+		if (FrontController.match("/Deck", request)) return new ManageDecksDispatcher();
+
 		// if (FrontController.match("/Player/(\\d+)/Challenge", path)) return new ChallengePlayerDispatcher();
 		// if (FrontController.match("/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
 
-		throw new Exception("no matching dispatcher for '" + path + "'");
+		throw new Exception("no matching dispatcher for '" + request.getPathInfo() + "'");
 	}
 }

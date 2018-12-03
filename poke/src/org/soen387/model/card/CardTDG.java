@@ -57,6 +57,7 @@ public class CardTDG {
 		s.setLong(3, deckId);
 		s.setString(4, type);
 		s.setString(5, name);
+		if (base == null) base = "";
 		s.setString(6, base);
 
 		int n = SQLLogger.processUpdate(s);
