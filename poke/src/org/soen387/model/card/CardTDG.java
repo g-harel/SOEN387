@@ -72,8 +72,8 @@ public class CardTDG {
 		s.setString(1, type);
 		s.setString(2, name);
 		s.setString(3, base);
-		s.setLong(3,  id);
-		s.setLong(4, version);
+		s.setLong(4,  id);
+		s.setLong(5, version);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();

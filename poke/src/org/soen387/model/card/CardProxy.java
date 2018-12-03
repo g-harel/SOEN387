@@ -30,21 +30,21 @@ public class CardProxy extends DomainObjectProxy<Long, Card> implements ICard {
 	public String getName() {
 		return this.getInnerObject().getName();
 	}
-	
+
 	public String getBase() {
 		return this.getInnerObject().getBase();
 	}
 
 	//
 
-	public void setType(String user) {
-		this.getInnerObject().setType(user);
+	public void setType(String type) {
+		this.getInnerObject().setType(type);
 	}
 
-	public void setName(String pass) {
-		this.getInnerObject().setName(pass);
+	public void setName(String name) {
+		this.getInnerObject().setName(name);
 	}
-	
+
 	public void setBase(String base) {
 		this.getInnerObject().setBase(base);
 	}
