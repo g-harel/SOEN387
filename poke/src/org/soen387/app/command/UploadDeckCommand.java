@@ -33,7 +33,7 @@ public class UploadDeckCommand extends Command {
 		}
 
 		try {
-			Deck deck = DeckFactory.createNew();
+			Deck deck = DeckFactory.createNew(this.playerId);
 	
 			for (String line : lines) {
 				Pattern pattern = Pattern.compile("^([ept]) \\\"([A-Z][a-z]+)\\\"(?: \\\"([A-Z][a-z]+)\\\")?$");

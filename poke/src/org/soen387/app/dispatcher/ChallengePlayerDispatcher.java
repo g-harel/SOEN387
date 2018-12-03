@@ -17,7 +17,8 @@ public class ChallengePlayerDispatcher extends Dispatcher {
 
 		try {
 			ChallengePlayerCommand c = new ChallengePlayerCommand(myHelper);
-			c.playerId = (String)myRequest.getAttribute("playerId");
+			c.challengerId = (Long)myRequest.getSession(true).getAttribute(RequestAttributes.CURRENT_USER_ID);
+			c.challengeeId = (String)myRequest.getAttribute("playerId");
 			c.execute();
 			UoW.getCurrent().commit();
 			myHelper.setRequestAttribute("message", "challenged");

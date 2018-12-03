@@ -2,6 +2,7 @@ package org.soen387.ser;
 
 import org.soen387.app.FrontController;
 import org.soen387.model.card.CardTDG;
+import org.soen387.model.challenge.ChallengeTDG;
 import org.soen387.model.deck.DeckTDG;
 import org.soen387.model.player.PlayerTDG;
 
@@ -13,6 +14,7 @@ public class RenewDatabase {
 			CardTDG.dropTable();
 			DeckTDG.dropTable();
 			PlayerTDG.dropTable();
+			ChallengeTDG.dropTable();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -21,6 +23,7 @@ public class RenewDatabase {
 			PlayerTDG.createTable();
 			DeckTDG.createTable();
 			CardTDG.createTable();
+			ChallengeTDG.createTable();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

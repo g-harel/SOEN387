@@ -16,7 +16,8 @@ public class DeckInputMapper {
 
 		return DeckFactory.createClean(
 			rs.getLong("id"),
-			rs.getLong("version")
+			rs.getLong("version"),
+			rs.getLong("player_id")
 		);
 	}
 

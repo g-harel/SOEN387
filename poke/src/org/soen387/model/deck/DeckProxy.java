@@ -16,4 +16,16 @@ public class DeckProxy extends DomainObjectProxy<Long, Deck> implements IDeck {
 			throw new DomainObjectCreationException(e.getMessage(),e);
 		}
 	}
+	
+	//
+	
+	public long getPlayerId() {
+		return this.getInnerObject().getPlayerId();
+	}
+	
+	//
+	
+	public void setPlayerId(long playerId) {
+		this.getInnerObject().setPlayerId(playerId);
+	}
 }

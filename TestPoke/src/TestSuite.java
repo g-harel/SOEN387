@@ -400,6 +400,8 @@ public class TestSuite {
 	 * Starting here we can use Player because if the tests before this are passing Player should work
 	 * 
 	 */
+
+	// PASS
 	@Test
 	public void testChallengePlayerSuccess() {
 		try {
@@ -422,6 +424,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testChallengePlayerFailureInvalidDeck() {
 		try {
@@ -443,7 +446,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testChallengePlayerFailureChallengeSelf() {
 		try {
@@ -466,7 +470,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testChallengePlayerFailureChallengeInvalidId() {
 		try {
@@ -490,6 +495,7 @@ public class TestSuite {
 		}
 	}
 
+	// PASS
 	@Test
 	public void testChallengePlayerFailureChallengeWithSomeoneElsesDeck() {
 		try {

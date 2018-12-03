@@ -10,7 +10,7 @@ import org.dsrg.soenea.service.logging.SQLLogger;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 
 public class ChallengeTDG {
-	public static final String TABLE = "cards";
+	public static final String TABLE = "challenges";
 
 	private static final String CREATE =
 		"CREATE TABLE IF NOT EXISTS " + ChallengeTDG.TABLE + " (" +

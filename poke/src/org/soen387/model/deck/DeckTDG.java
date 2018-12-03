@@ -14,14 +14,15 @@ public class DeckTDG {
 
 	private static final String CREATE =
 		"CREATE TABLE IF NOT EXISTS " + DeckTDG.TABLE + " (" +
-		"    id      INT          NOT NULL AUTO_INCREMENT,   " +
-		"    version INT          NOT NULL,                  " +
+		"    id        INT          NOT NULL AUTO_INCREMENT,   " +
+		"    version   INT          NOT NULL,                  " +
+		"    player_id INT          NOT NULL,                  " +
 		"    PRIMARY KEY (id)                                " +
 		") ENGINE=InnoDB;                                    ";
 	private static final String DROP = "DROP TABLE IF EXISTS " + DeckTDG.TABLE;
 
-	private static final String INSERT = "INSERT INTO " + DeckTDG.TABLE + " (id, version) VALUES (?, ?)";
-	private static final String UPDATE = "UPDATE " + DeckTDG.TABLE + " SET version=version+1 WHERE id=? AND version=?";
+	private static final String INSERT = "INSERT INTO " + DeckTDG.TABLE + " (id, version, player_id) VALUES (?, ?, ?)";
+	private static final String UPDATE = "UPDATE " + DeckTDG.TABLE + " SET version=version+1, player_id=? WHERE id=? AND version=?";
 	private static final String DELETE = "DELETE FROM " + DeckTDG.TABLE + " WHERE id=? AND version=?";
 
 	private static final String FINDALL = "SELECT * FROM " + DeckTDG.TABLE;
@@ -43,24 +44,26 @@ public class DeckTDG {
 
 	//
 
-	public static int insert(Long id, long version) throws SQLException {
+	public static int insert(Long id, long version, long playerId) throws SQLException {
 		SoenEAConnection c = DbRegistry.getDbConnection();
 
 		PreparedStatement s = c.prepareStatement(DeckTDG.INSERT);
 		s.setLong(1, id);
 		s.setLong(2, version);
+		s.setLong(3, playerId);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();
 		return n;
 	}
 
-	public static int update(Long id, long version) throws SQLException {
+	public static int update(Long id, long version, long playerId) throws SQLException {
 		SoenEAConnection c = DbRegistry.getDbConnection();
 
 		PreparedStatement s = c.prepareStatement(DeckTDG.UPDATE);
-		s.setLong(1, id);
-		s.setLong(2, version);
+		s.setLong(0,  playerId);
+		s.setLong(2, id);
+		s.setLong(3, version);
 
 		int n = SQLLogger.processUpdate(s);
 		s.close();

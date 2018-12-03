@@ -26,6 +26,8 @@ import org.soen387.app.dispatcher.ManageDeckDispatcher;
 import org.soen387.app.dispatcher.RegisterDispatcher;
 import org.soen387.model.card.Card;
 import org.soen387.model.card.CardOutputMapper;
+import org.soen387.model.challenge.Challenge;
+import org.soen387.model.challenge.ChallengeOutputMapper;
 import org.soen387.model.deck.Deck;
 import org.soen387.model.deck.DeckOutputMapper;
 import org.soen387.model.player.Player;
@@ -56,6 +58,7 @@ public class FrontController extends Servlet {
 		myDomain2MapperMapper.addMapping(Player.class, PlayerOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Deck.class, DeckOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Card.class, CardOutputMapper.class);
+		myDomain2MapperMapper.addMapping(Challenge.class, ChallengeOutputMapper.class);
 		UoW.initMapperFactory(myDomain2MapperMapper);
 	}
 
@@ -109,10 +112,10 @@ public class FrontController extends Servlet {
 		if (FrontController.match("/Player/Register", request)) return new RegisterDispatcher();
 		if (FrontController.match("/Player/Login", request)) return new LoginDispatcher();
 		if (FrontController.match("/Player/Logout", request)) return new LogoutDispatcher();
-		if (FrontController.match("/Player/(\\d+)/Challenge", request, "playerId")) return new ChallengePlayerDispatcher();
+		if (FrontController.match("/Player/(-?\\d+)/Challenge", request, "playerId")) return new ChallengePlayerDispatcher();
 		if (FrontController.match("/Player", request)) return new PlayerListDispatcher();
 		
-		if (FrontController.match("/Deck/(\\d+)", request, "deckId")) return new ManageDeckDispatcher();
+		if (FrontController.match("/Deck/(-?\\d+)", request, "deckId")) return new ManageDeckDispatcher();
 		if (FrontController.match("/Deck", request)) return new ManageDecksDispatcher();
 
 		// if (FrontController.match("/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
