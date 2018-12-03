@@ -1,27 +1,27 @@
 package org.soen387.app.command;
 
-import java.util.List;
-
 import org.dsrg.soenea.domain.command.CommandError;
 import org.dsrg.soenea.domain.command.CommandException;
 import org.dsrg.soenea.domain.command.impl.Command;
 import org.dsrg.soenea.domain.helper.Helper;
-import org.soen387.model.card.CardInputMapper;
-import org.soen387.model.card.ICard;
+import org.soen387.model.game.GameInputMapper;
+import org.soen387.model.game.Game;
 
-public class ViewDeckCommand extends Command {
-	public List<ICard> cards;
-	public String deckId;
-	
-	public ViewDeckCommand(Helper helper) {
+public class GameBoardCommand extends Command {
+	public long gameId;
+	public long playerId;
+	public Game game;
+
+	public GameBoardCommand(Helper helper) {
 		super(helper);
 	}
 
 	public void process() throws CommandException {
-		if (this.deckId == null || this.deckId.equals("")) throw new CommandException("missing deckId");
-
 		try {
-			this.cards = CardInputMapper.findByDeck(Long.parseLong(deckId));			
+			this.game = GameInputMapper.find(gameId);
+			if (this.playerId != this.game.getPlayer1() && this.playerId != this.game.getPlayer2()) {
+				throw new Exception("not in the game");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException("can't read");

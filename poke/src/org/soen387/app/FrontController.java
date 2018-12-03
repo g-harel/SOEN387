@@ -22,6 +22,7 @@ import org.soen387.app.dispatcher.PlayerListDispatcher;
 import org.soen387.app.dispatcher.ChallengeListDispatcher;
 import org.soen387.app.dispatcher.ChallengePlayerDispatcher;
 import org.soen387.app.dispatcher.ChallengeResponseDispatcher;
+import org.soen387.app.dispatcher.GameBoardDispatcher;
 import org.soen387.app.dispatcher.GameListDispatcher;
 import org.soen387.app.dispatcher.LoginDispatcher;
 import org.soen387.app.dispatcher.LogoutDispatcher;
@@ -126,7 +127,8 @@ public class FrontController extends Servlet {
 
 		if (FrontController.match("/Challenge/(-?\\d+)/(\\w+)", request, "challengeId, action")) return new ChallengeResponseDispatcher();
 		if (FrontController.match("/Challenge", request)) return new ChallengeListDispatcher();
-		
+
+		if (FrontController.match("/Game/(-?\\d+)", request, "gameId")) return new GameBoardDispatcher();
 		if (FrontController.match("/Game", request)) return new GameListDispatcher();
 
 		throw new Exception("no matching dispatcher for '" + request.getPathInfo() + "'");

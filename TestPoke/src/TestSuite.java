@@ -738,7 +738,7 @@ public class TestSuite {
 		}
 	}
 	
-	// TODO list games
+	// PASS
 	@Test
 	public void testAcceptChallengesSuccessAcceptWithDifferentDecks() {
 		try {
@@ -1180,6 +1180,7 @@ public class TestSuite {
 		}
 	}
 
+	// TODO no game cards
 	@Test
 	public void testViewBoardSuccess() {
 		try {
@@ -1231,7 +1232,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewBoardFailureNotMyGame() {
 		try {
