@@ -25,7 +25,7 @@ public class ChallengeTDG {
 	private static final String DROP = "DROP TABLE IF EXISTS " + ChallengeTDG.TABLE;
 
 	private static final String INSERT = "INSERT INTO " + ChallengeTDG.TABLE + " (id, version, challenger, challengee, status, deck_id) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE " + ChallengeTDG.TABLE + " SET version=version+1, challenger=?, challengee=? status=?, deck_id=? WHERE id=? AND version=?";
+	private static final String UPDATE = "UPDATE " + ChallengeTDG.TABLE + " SET version=version+1, challenger=?, challengee=?, status=?, deck_id=? WHERE id=? AND version=?";
 	private static final String DELETE = "DELETE FROM " + ChallengeTDG.TABLE + " WHERE id=? AND version=?";
 
 	private static final String FINDALL = "SELECT * FROM " + ChallengeTDG.TABLE;

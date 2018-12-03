@@ -518,7 +518,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testListChallengesSuccess() {
 		try {
@@ -553,7 +554,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testListChallengesFailureNotLoggedIn() {
 		try {
@@ -584,9 +586,9 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
 
-	
+
+	// PASS
 	@Test
 	public void testAcceptChallengesSuccess() {
 		try {
@@ -639,6 +641,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testAcceptChallengesSuccessMultipleGamesWithSamePlayers() {
 		try {
@@ -686,6 +689,7 @@ public class TestSuite {
 			}
 		}
 	
+	// PASS
 	@Test
 	public void testAcceptChallengesSuccessAcceptTwoChallengesWithTheSameDeck() {
 		try {
@@ -734,6 +738,7 @@ public class TestSuite {
 		}
 	}
 	
+	// TODO list games
 	@Test
 	public void testAcceptChallengesSuccessAcceptWithDifferentDecks() {
 		try {
@@ -800,7 +805,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO not working for some reason
 	@Test
 	public void testAcceptChallengesFailureChallngeSamePlayerTwice() {
 		try {
@@ -827,7 +833,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testAcceptChallengesFailureAcceptSomeoneElsesChallenge() {
 		try {
@@ -878,6 +885,7 @@ public class TestSuite {
 		}
 	}
 
+	// PASS
 	@Test
 	public void testAcceptChallengesFailureAcceptOwnChallenge() {
 		try {
@@ -920,6 +928,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testAcceptChallengesFailureAcceptAcceptedChallenge() {
 		try {
@@ -978,7 +987,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testRefuseChallengesSuccess() {
 		try {
@@ -1053,7 +1063,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testRefuseChallengesFailureRefuseSomeoneElsesChallenge() {
 		try {

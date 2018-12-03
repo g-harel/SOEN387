@@ -19,7 +19,9 @@ import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.app.dispatcher.ManageDecksDispatcher;
 import org.soen387.app.dispatcher.PlayerListDispatcher;
+import org.soen387.app.dispatcher.ChallengeListDispatcher;
 import org.soen387.app.dispatcher.ChallengePlayerDispatcher;
+import org.soen387.app.dispatcher.ChallengeResponseDispatcher;
 import org.soen387.app.dispatcher.LoginDispatcher;
 import org.soen387.app.dispatcher.LogoutDispatcher;
 import org.soen387.app.dispatcher.ManageDeckDispatcher;
@@ -100,7 +102,7 @@ public class FrontController extends Servlet {
 				request.setAttribute(params[i], m.group(i+1));
 			}
 		}
-		
+
 		return m.matches();
 	}
 
@@ -118,7 +120,8 @@ public class FrontController extends Servlet {
 		if (FrontController.match("/Deck/(-?\\d+)", request, "deckId")) return new ManageDeckDispatcher();
 		if (FrontController.match("/Deck", request)) return new ManageDecksDispatcher();
 
-		// if (FrontController.match("/Challenge/(\\d+)/(Accept)", path)) return new ChallengePlayerDispatcher();
+		if (FrontController.match("/Challenge/(-?\\d+)/(\\w+)", request, "challengeId, action")) return new ChallengeResponseDispatcher();
+		if (FrontController.match("/Challenge", request)) return new ChallengeListDispatcher();
 
 		throw new Exception("no matching dispatcher for '" + request.getPathInfo() + "'");
 	}
