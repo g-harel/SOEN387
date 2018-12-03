@@ -58,7 +58,7 @@ public class ChallengeResponseCommand extends Command {
 			new ChallengeOutputMapper().update(c);
 			
 			// challenger is player1
-			GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "TODO", c.getChallengee(), Long.parseLong(deckId), "TODO");
+			GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "playing", c.getChallengee(), Long.parseLong(deckId), "playing");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException("can't read");

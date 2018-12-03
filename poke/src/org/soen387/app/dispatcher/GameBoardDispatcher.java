@@ -20,6 +20,7 @@ public class GameBoardDispatcher extends Dispatcher {
 		try {
 			GameBoardCommand c = new GameBoardCommand(myHelper);
 			c.gameId = Long.parseLong((String)myRequest.getAttribute("gameId"));
+			c.playerId = (Long)myRequest.getSession(true).getAttribute(RequestAttributes.CURRENT_USER_ID);
 			c.execute();
 			UoW.getCurrent().commit();
 			myHelper.setRequestAttribute("game", c.game);

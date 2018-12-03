@@ -18,6 +18,7 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.app.dispatcher.ManageDecksDispatcher;
+import org.soen387.app.dispatcher.ManageGameDispatcher;
 import org.soen387.app.dispatcher.PlayerListDispatcher;
 import org.soen387.app.dispatcher.ChallengeListDispatcher;
 import org.soen387.app.dispatcher.ChallengePlayerDispatcher;
@@ -128,6 +129,7 @@ public class FrontController extends Servlet {
 		if (FrontController.match("/Challenge/(-?\\d+)/(\\w+)", request, "challengeId, action")) return new ChallengeResponseDispatcher();
 		if (FrontController.match("/Challenge", request)) return new ChallengeListDispatcher();
 
+		if (FrontController.match("/Game/(-?\\d+)/(\\w+)", request, "gameId, action")) return new ManageGameDispatcher();
 		if (FrontController.match("/Game/(-?\\d+)", request, "gameId")) return new GameBoardDispatcher();
 		if (FrontController.match("/Game", request)) return new GameListDispatcher();
 

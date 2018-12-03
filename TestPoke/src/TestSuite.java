@@ -2533,7 +2533,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testRetireFromGameSuccess() {
 		try {
@@ -2582,7 +2583,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testRetireFromGameFailureNotMyGame() {
 		try {
