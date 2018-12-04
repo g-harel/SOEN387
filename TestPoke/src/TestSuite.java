@@ -1278,6 +1278,7 @@ public class TestSuite {
 		}
 	}
 	
+	// TODO one off
 	@Test
 	public void testEndTurnSuccess() {
 		try {
@@ -1339,6 +1340,7 @@ public class TestSuite {
 		}
 	}
 	
+	// TODO one off
 	@Test
 	public void testEndTurnCausesDiscardSuccess() {
 		try {
@@ -1423,6 +1425,7 @@ public class TestSuite {
 		}
 	}
 
+	// PASS
 	@Test
 	public void testEndTurnFailNotMyTurn() {
 		try {
@@ -1478,7 +1481,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testEndTurnFailWrongBoardVersion() {
 		try {
@@ -1536,6 +1540,7 @@ public class TestSuite {
 		}
 	}
 	
+	// PASS
 	@Test
 	public void testViewHandSuccess() {
 		try {
@@ -1595,7 +1600,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewHandFailureNotMyGame() {
 		try {
@@ -1645,6 +1651,7 @@ public class TestSuite {
 		}
 	}
 
+	// TODO
 	@Test
 	public void testPlayPokemonToBenchSuccess() {
 		try {
@@ -1696,7 +1703,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testPlayPokemonToBenchFailureNotMyGame() {
 		try {
@@ -1750,7 +1758,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testPlayFailureNotInHand() {
 		try {
@@ -1799,7 +1808,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testPlayFailureEnergyWithNoTarget() {
 		try {
@@ -1849,7 +1859,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testPlayFailureStageOneWithNoTarget() {
 		try {
@@ -1900,6 +1911,7 @@ public class TestSuite {
 		}
 	}
 	
+	// TODO
 	@Test
 	public void testPlayTrainerSuccess() {
 		try {
@@ -1952,6 +1964,7 @@ public class TestSuite {
 		}
 	}
 
+	// TODO
 	@Test
 	public void testViewDiscardSuccess() {
 		try {
@@ -2042,7 +2055,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewDiscardFailureNotMyGame() {
 		try {
@@ -2093,7 +2107,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testViewDiscardFailureViewingDiscardOfSomeoneNotPlaying() {
 		try {
@@ -2144,7 +2159,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO
 	@Test
 	public void testPlayEnergySuccess() {
 		try {
@@ -2206,7 +2222,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO
 	@Test
 	public void testPlayEnergySuccessMultipleEnergyOnConsecutiveTurns() {
 		try {
@@ -2282,7 +2299,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO
 	@Test
 	public void testPlayEnergyFailureMultipleEnergyOnSameTurn() {
 		try {
@@ -2347,7 +2365,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO
 	@Test
 	public void testEvolvePokemonSuccess() {
 		try {
@@ -2406,7 +2425,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// TODO
 	@Test
 	public void testEvolvePokemonSuccessProperlyTransferAttachedEnergy() {
 		try {
@@ -2474,7 +2494,8 @@ public class TestSuite {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
+	// PASS
 	@Test
 	public void testEvolvePokemonFailWrongBasicPokemon() {
 		try {

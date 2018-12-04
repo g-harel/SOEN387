@@ -65,17 +65,23 @@ public class ChallengeResponseCommand extends Command {
 			// challenger is player1
 			Game g = GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "playing", c.getChallengee(), Long.parseLong(deckId), "playing");
 
-			boolean first = true;
+			boolean first1 = true;
 			for (ICard card : CardInputMapper.findByDeck(g.getDeck1())) {
 				String s = "deck";
-				if (first) {
+				if (first1) {
 					s = "hand";
-					first = false;
+					first1 = false;
 				}
 				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck1(), s);
 			}
+			boolean first2 = true;
 			for (ICard card : CardInputMapper.findByDeck(g.getDeck2())) {
-				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck2(), "deck");
+				String s = "deck";
+				if (first2) {
+					s = "hand";
+					first2 = false;
+				}
+				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck2(), s);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
