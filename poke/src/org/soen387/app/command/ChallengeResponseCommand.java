@@ -6,11 +6,16 @@ import org.dsrg.soenea.domain.command.CommandError;
 import org.dsrg.soenea.domain.command.CommandException;
 import org.dsrg.soenea.domain.command.impl.Command;
 import org.dsrg.soenea.domain.helper.Helper;
+import org.soen387.model.card.CardInputMapper;
 import org.soen387.model.card.ICard;
 import org.soen387.model.challenge.Challenge;
 import org.soen387.model.challenge.ChallengeInputMapper;
 import org.soen387.model.challenge.ChallengeOutputMapper;
+import org.soen387.model.game.Game;
 import org.soen387.model.game.GameFactory;
+import org.soen387.model.gamecard.GameCard;
+import org.soen387.model.gamecard.GameCardFactory;
+import org.soen387.model.gamecard.GameCardOutputMapper;
 
 public class ChallengeResponseCommand extends Command {
 	public List<ICard> cards;
@@ -58,7 +63,20 @@ public class ChallengeResponseCommand extends Command {
 			new ChallengeOutputMapper().update(c);
 			
 			// challenger is player1
-			GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "playing", c.getChallengee(), Long.parseLong(deckId), "playing");
+			Game g = GameFactory.createNew(0, c.getChallenger(), c.getDeckId(), "playing", c.getChallengee(), Long.parseLong(deckId), "playing");
+
+			boolean first = true;
+			for (ICard card : CardInputMapper.findByDeck(g.getDeck1())) {
+				String s = "deck";
+				if (first) {
+					s = "hand";
+					first = false;
+				}
+				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck1(), s);
+			}
+			for (ICard card : CardInputMapper.findByDeck(g.getDeck2())) {
+				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck2(), "deck");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new CommandException("can't read");

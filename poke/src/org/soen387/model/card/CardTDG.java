@@ -25,7 +25,7 @@ public class CardTDG {
 	private static final String DROP = "DROP TABLE IF EXISTS " + CardTDG.TABLE;
 
 	private static final String INSERT = "INSERT INTO " + CardTDG.TABLE + " (id, version, deck_id, type, name, base) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE " + CardTDG.TABLE + " SET version=version+1, type=?, name=? base=? WHERE id=? AND version=?";
+	private static final String UPDATE = "UPDATE " + CardTDG.TABLE + " SET version=version+1, type=?, name=?, base=? WHERE id=? AND version=?";
 	private static final String DELETE = "DELETE FROM " + CardTDG.TABLE + " WHERE id=? AND version=?";
 
 	private static final String FINDALL = "SELECT * FROM " + CardTDG.TABLE;

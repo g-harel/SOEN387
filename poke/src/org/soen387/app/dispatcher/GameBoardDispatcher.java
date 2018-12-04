@@ -24,6 +24,10 @@ public class GameBoardDispatcher extends Dispatcher {
 			c.execute();
 			UoW.getCurrent().commit();
 			myHelper.setRequestAttribute("game", c.game);
+			myHelper.setRequestAttribute("handsize1", c.hand1);
+			myHelper.setRequestAttribute("handsize2", c.hand2);
+			myHelper.setRequestAttribute("decksize1", c.deck1);
+			myHelper.setRequestAttribute("decksize2", c.deck2);
 			forward("/WEB-INF/jsp/board.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

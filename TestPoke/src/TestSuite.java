@@ -1180,7 +1180,7 @@ public class TestSuite {
 		}
 	}
 
-	// TODO no game cards
+	// PASS
 	@Test
 	public void testViewBoardSuccess() {
 		try {

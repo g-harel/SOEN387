@@ -37,6 +37,8 @@ import org.soen387.model.deck.Deck;
 import org.soen387.model.deck.DeckOutputMapper;
 import org.soen387.model.game.Game;
 import org.soen387.model.game.GameOutputMapper;
+import org.soen387.model.gamecard.GameCard;
+import org.soen387.model.gamecard.GameCardOutputMapper;
 import org.soen387.model.player.Player;
 import org.soen387.model.player.PlayerOutputMapper;
 
@@ -67,6 +69,7 @@ public class FrontController extends Servlet {
 		myDomain2MapperMapper.addMapping(Card.class, CardOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Challenge.class, ChallengeOutputMapper.class);
 		myDomain2MapperMapper.addMapping(Game.class, GameOutputMapper.class);
+		myDomain2MapperMapper.addMapping(GameCard.class, GameCardOutputMapper.class);
 		UoW.initMapperFactory(myDomain2MapperMapper);
 	}
 
