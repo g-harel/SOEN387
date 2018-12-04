@@ -74,14 +74,8 @@ public class ChallengeResponseCommand extends Command {
 				}
 				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck1(), s);
 			}
-			boolean first2 = true;
 			for (ICard card : CardInputMapper.findByDeck(g.getDeck2())) {
-				String s = "deck";
-				if (first2) {
-					s = "hand";
-					first2 = false;
-				}
-				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck2(), s);
+				GameCardFactory.createNew(g.getId(), card.getId(), g.getDeck2(), "deck");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
